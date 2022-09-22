@@ -8,17 +8,25 @@
 
 /* Begin PBXBuildFile section */
 		8298FB0328DD007100EBE15F /* Counter_TCAApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8298FB0228DD007100EBE15F /* Counter_TCAApp.swift */; };
-		8298FB0528DD007100EBE15F /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8298FB0428DD007100EBE15F /* ContentView.swift */; };
 		8298FB0728DD007600EBE15F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8298FB0628DD007600EBE15F /* Assets.xcassets */; };
 		8298FB0A28DD007600EBE15F /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8298FB0928DD007600EBE15F /* Preview Assets.xcassets */; };
+		8298FB1128DD02EB00EBE15F /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8298FB1028DD02EB00EBE15F /* Model.swift */; };
+		8298FB1528DD036B00EBE15F /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8298FB1428DD036B00EBE15F /* RootView.swift */; };
+		8298FB1828DD03EE00EBE15F /* CounterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8298FB1728DD03EE00EBE15F /* CounterView.swift */; };
+		8298FB1C28DD044F00EBE15F /* Int.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8298FB1B28DD044F00EBE15F /* Int.swift */; };
+		8298FB1F28DD09C200EBE15F /* IfPrimeModalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8298FB1E28DD09C200EBE15F /* IfPrimeModalView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		8298FAFF28DD007100EBE15F /* Counter-TCA.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Counter-TCA.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8298FB0228DD007100EBE15F /* Counter_TCAApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Counter_TCAApp.swift; sourceTree = "<group>"; };
-		8298FB0428DD007100EBE15F /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		8298FB0628DD007600EBE15F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8298FB0928DD007600EBE15F /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		8298FB1028DD02EB00EBE15F /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
+		8298FB1428DD036B00EBE15F /* RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
+		8298FB1728DD03EE00EBE15F /* CounterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CounterView.swift; sourceTree = "<group>"; };
+		8298FB1B28DD044F00EBE15F /* Int.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Int.swift; sourceTree = "<group>"; };
+		8298FB1E28DD09C200EBE15F /* IfPrimeModalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IfPrimeModalView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -52,7 +60,9 @@
 			isa = PBXGroup;
 			children = (
 				8298FB0228DD007100EBE15F /* Counter_TCAApp.swift */,
-				8298FB0428DD007100EBE15F /* ContentView.swift */,
+				8298FB1928DD042B00EBE15F /* Common */,
+				8298FB1228DD033800EBE15F /* Modules */,
+				8298FB1028DD02EB00EBE15F /* Model.swift */,
 				8298FB0628DD007600EBE15F /* Assets.xcassets */,
 				8298FB0828DD007600EBE15F /* Preview Content */,
 			);
@@ -65,6 +75,56 @@
 				8298FB0928DD007600EBE15F /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		8298FB1228DD033800EBE15F /* Modules */ = {
+			isa = PBXGroup;
+			children = (
+				8298FB1D28DD098A00EBE15F /* IfPrimeModal */,
+				8298FB1628DD039500EBE15F /* Counter */,
+				8298FB1328DD034D00EBE15F /* Root */,
+			);
+			path = Modules;
+			sourceTree = "<group>";
+		};
+		8298FB1328DD034D00EBE15F /* Root */ = {
+			isa = PBXGroup;
+			children = (
+				8298FB1428DD036B00EBE15F /* RootView.swift */,
+			);
+			path = Root;
+			sourceTree = "<group>";
+		};
+		8298FB1628DD039500EBE15F /* Counter */ = {
+			isa = PBXGroup;
+			children = (
+				8298FB1728DD03EE00EBE15F /* CounterView.swift */,
+			);
+			path = Counter;
+			sourceTree = "<group>";
+		};
+		8298FB1928DD042B00EBE15F /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				8298FB1A28DD043700EBE15F /* Extensions */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
+		8298FB1A28DD043700EBE15F /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				8298FB1B28DD044F00EBE15F /* Int.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		8298FB1D28DD098A00EBE15F /* IfPrimeModal */ = {
+			isa = PBXGroup;
+			children = (
+				8298FB1E28DD09C200EBE15F /* IfPrimeModalView.swift */,
+			);
+			path = IfPrimeModal;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -137,8 +197,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8298FB0528DD007100EBE15F /* ContentView.swift in Sources */,
+				8298FB1528DD036B00EBE15F /* RootView.swift in Sources */,
+				8298FB1128DD02EB00EBE15F /* Model.swift in Sources */,
+				8298FB1C28DD044F00EBE15F /* Int.swift in Sources */,
 				8298FB0328DD007100EBE15F /* Counter_TCAApp.swift in Sources */,
+				8298FB1828DD03EE00EBE15F /* CounterView.swift in Sources */,
+				8298FB1F28DD09C200EBE15F /* IfPrimeModalView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
