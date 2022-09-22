@@ -15,6 +15,11 @@
 		8298FB1828DD03EE00EBE15F /* CounterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8298FB1728DD03EE00EBE15F /* CounterView.swift */; };
 		8298FB1C28DD044F00EBE15F /* Int.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8298FB1B28DD044F00EBE15F /* Int.swift */; };
 		8298FB1F28DD09C200EBE15F /* IfPrimeModalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8298FB1E28DD09C200EBE15F /* IfPrimeModalView.swift */; };
+		8298FB2328DD0FA500EBE15F /* WolframAlphaResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8298FB2228DD0FA500EBE15F /* WolframAlphaResult.swift */; };
+		8298FB2628DD1B0300EBE15F /* FavoritePrimesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8298FB2528DD1B0300EBE15F /* FavoritePrimesView.swift */; };
+		8298FB2928DD1D9700EBE15F /* Collections in Frameworks */ = {isa = PBXBuildFile; productRef = 8298FB2828DD1D9700EBE15F /* Collections */; };
+		8298FB2B28DD1D9700EBE15F /* DequeModule in Frameworks */ = {isa = PBXBuildFile; productRef = 8298FB2A28DD1D9700EBE15F /* DequeModule */; };
+		8298FB2D28DD1D9700EBE15F /* OrderedCollections in Frameworks */ = {isa = PBXBuildFile; productRef = 8298FB2C28DD1D9700EBE15F /* OrderedCollections */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -27,6 +32,8 @@
 		8298FB1728DD03EE00EBE15F /* CounterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CounterView.swift; sourceTree = "<group>"; };
 		8298FB1B28DD044F00EBE15F /* Int.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Int.swift; sourceTree = "<group>"; };
 		8298FB1E28DD09C200EBE15F /* IfPrimeModalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IfPrimeModalView.swift; sourceTree = "<group>"; };
+		8298FB2228DD0FA500EBE15F /* WolframAlphaResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WolframAlphaResult.swift; sourceTree = "<group>"; };
+		8298FB2528DD1B0300EBE15F /* FavoritePrimesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritePrimesView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -34,6 +41,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8298FB2928DD1D9700EBE15F /* Collections in Frameworks */,
+				8298FB2B28DD1D9700EBE15F /* DequeModule in Frameworks */,
+				8298FB2D28DD1D9700EBE15F /* OrderedCollections in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -60,6 +70,7 @@
 			isa = PBXGroup;
 			children = (
 				8298FB0228DD007100EBE15F /* Counter_TCAApp.swift */,
+				8298FB2028DD0F7000EBE15F /* Domain */,
 				8298FB1928DD042B00EBE15F /* Common */,
 				8298FB1228DD033800EBE15F /* Modules */,
 				8298FB1028DD02EB00EBE15F /* Model.swift */,
@@ -80,6 +91,7 @@
 		8298FB1228DD033800EBE15F /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				8298FB2428DD1AEA00EBE15F /* Favorites */,
 				8298FB1D28DD098A00EBE15F /* IfPrimeModal */,
 				8298FB1628DD039500EBE15F /* Counter */,
 				8298FB1328DD034D00EBE15F /* Root */,
@@ -127,6 +139,30 @@
 			path = IfPrimeModal;
 			sourceTree = "<group>";
 		};
+		8298FB2028DD0F7000EBE15F /* Domain */ = {
+			isa = PBXGroup;
+			children = (
+				8298FB2128DD0F7E00EBE15F /* Models */,
+			);
+			path = Domain;
+			sourceTree = "<group>";
+		};
+		8298FB2128DD0F7E00EBE15F /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				8298FB2228DD0FA500EBE15F /* WolframAlphaResult.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		8298FB2428DD1AEA00EBE15F /* Favorites */ = {
+			isa = PBXGroup;
+			children = (
+				8298FB2528DD1B0300EBE15F /* FavoritePrimesView.swift */,
+			);
+			path = Favorites;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -143,6 +179,11 @@
 			dependencies = (
 			);
 			name = "Counter-TCA";
+			packageProductDependencies = (
+				8298FB2828DD1D9700EBE15F /* Collections */,
+				8298FB2A28DD1D9700EBE15F /* DequeModule */,
+				8298FB2C28DD1D9700EBE15F /* OrderedCollections */,
+			);
 			productName = "Counter-TCA";
 			productReference = 8298FAFF28DD007100EBE15F /* Counter-TCA.app */;
 			productType = "com.apple.product-type.application";
@@ -171,6 +212,9 @@
 				Base,
 			);
 			mainGroup = 8298FAF628DD007100EBE15F;
+			packageReferences = (
+				8298FB2728DD1D9700EBE15F /* XCRemoteSwiftPackageReference "swift-collections" */,
+			);
 			productRefGroup = 8298FB0028DD007100EBE15F /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -197,11 +241,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8298FB2328DD0FA500EBE15F /* WolframAlphaResult.swift in Sources */,
 				8298FB1528DD036B00EBE15F /* RootView.swift in Sources */,
 				8298FB1128DD02EB00EBE15F /* Model.swift in Sources */,
 				8298FB1C28DD044F00EBE15F /* Int.swift in Sources */,
 				8298FB0328DD007100EBE15F /* Counter_TCAApp.swift in Sources */,
 				8298FB1828DD03EE00EBE15F /* CounterView.swift in Sources */,
+				8298FB2628DD1B0300EBE15F /* FavoritePrimesView.swift in Sources */,
 				8298FB1F28DD09C200EBE15F /* IfPrimeModalView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -403,6 +449,35 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		8298FB2728DD1D9700EBE15F /* XCRemoteSwiftPackageReference "swift-collections" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/apple/swift-collections.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		8298FB2828DD1D9700EBE15F /* Collections */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8298FB2728DD1D9700EBE15F /* XCRemoteSwiftPackageReference "swift-collections" */;
+			productName = Collections;
+		};
+		8298FB2A28DD1D9700EBE15F /* DequeModule */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8298FB2728DD1D9700EBE15F /* XCRemoteSwiftPackageReference "swift-collections" */;
+			productName = DequeModule;
+		};
+		8298FB2C28DD1D9700EBE15F /* OrderedCollections */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8298FB2728DD1D9700EBE15F /* XCRemoteSwiftPackageReference "swift-collections" */;
+			productName = OrderedCollections;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 8298FAF728DD007100EBE15F /* Project object */;
 }

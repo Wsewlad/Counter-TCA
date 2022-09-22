@@ -14,7 +14,7 @@ struct RootView: View {
                 NavigationLink(destination: CounterView()) {
                     Text("Counter demo")
                 }
-                NavigationLink(destination: EmptyView()) {
+                NavigationLink(destination: FavoritePrimesView()) {
                     Text("Favorite primes")
                 }
             }
