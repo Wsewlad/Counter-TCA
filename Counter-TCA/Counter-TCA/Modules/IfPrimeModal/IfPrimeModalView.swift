@@ -25,11 +25,15 @@ struct IfPrimeModalView: View {
 //MARK: - Actions
 private extension IfPrimeModalView {
     func toggleFavorites() {
-        if self.store.state.count.isPrime {
+        if isInFavorites {
             self.store.send(.primeModal(.removeFavoritePrimeTapped))
         } else {
             self.store.send(.primeModal(.saveFavoritePrimeTapped))
         }
+    }
+    
+    var isInFavorites: Bool {
+        self.store.state.favoritePrimes.contains(self.store.state.count)
     }
 }
 
@@ -42,7 +46,7 @@ private extension IfPrimeModalView {
     }
     
     var actionTitle: String {
-        self.store.state.isInFavorites ?
+        isInFavorites ?
         "Remove from favorite primes" :
         "Save to favorite primes"
     }

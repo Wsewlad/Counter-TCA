@@ -13,13 +13,24 @@ let wolframAlphaApiKey = "T8R7LH-X7L2V6G98P"
 
 struct AppState {
     var count: Int = 0
-    var favoritePrimes: OrderedSet<Int> = []
     var loggedInUser: User? = nil
+    var favoritePrimes: OrderedSet<Int> = []
     var activityFeed: [Activity] = []
     
-    var isInFavorites: Bool {
-        self.favoritePrimes.contains(self.count)
+    var favoritePrimesState: FavoritePrimesState {
+        get {
+            .init(favoritePrimes: self.favoritePrimes, activityFeed: self.activityFeed)
+        }
+        set {
+            self.favoritePrimes = newValue.favoritePrimes
+            self.activityFeed = newValue.activityFeed
+        }
     }
+}
+
+struct FavoritePrimesState {
+    var favoritePrimes: OrderedSet<Int> = []
+    var activityFeed: [Activity] = []
 }
 
 //MARK: - Wolfram Alpha
