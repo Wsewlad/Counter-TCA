@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct CounterView: View {
-    @EnvironmentObject var model: Model
+    @EnvironmentObject var store: Store<AppState>
     
     @State private var isPrimeModalShown: Bool = false
     @State private var alertNthPrimePresented: Bool = false
@@ -23,7 +23,7 @@ struct CounterView: View {
                     isPresented: $alertNthPrimePresented,
                     presenting: alertNthPrime,
                     actions: { _ in Button("OK", action: {}) },
-                    message: { n in Text("The \(model.count.ordinal) prime is \(n)") }
+                    message: { n in Text("The \(self.store.state.count.ordinal) prime is \(n)") }
                 )
                 .onChange(of: alertNthPrimePresented) { newValue in
                     if !newValue {
@@ -45,13 +45,13 @@ struct CounterView: View {
 private extension CounterView {
     var stepperView: some View {
         HStack {
-            Button(action: { model.decrement() }) {
+            Button(action: { self.store.state.decrement() }) {
                 Text("-")
             }
             
-            Text("\(model.count)")
+            Text("\(self.store.state.count)")
             
-            Button(action: { model.increment() }) {
+            Button(action: { self.store.state.increment() }) {
                 Text("+")
             }
         }
@@ -67,7 +67,7 @@ private extension CounterView {
             }
             
             Button(action: self.nthPrimeButtonAction) {
-                Text("What is the \(model.count.ordinal) prime?")
+                Text("What is the \(self.store.state.count.ordinal) prime?")
             }
             .disabled(self.isNthPrimeButtonDisabled)
         }
@@ -78,7 +78,7 @@ private extension CounterView {
 private extension CounterView {
     func nthPrimeButtonAction() {
         self.isNthPrimeButtonDisabled = true
-        model.nthPrime {
+        self.store.state.nthPrime {
             self.alertNthPrime = $0
             self.alertNthPrimePresented = $0 != nil
             self.isNthPrimeButtonDisabled = false

@@ -12,7 +12,7 @@
 		8298FB0328DD007100EBE15F /* Counter_TCAApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8298FB0228DD007100EBE15F /* Counter_TCAApp.swift */; };
 		8298FB0728DD007600EBE15F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8298FB0628DD007600EBE15F /* Assets.xcassets */; };
 		8298FB0A28DD007600EBE15F /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8298FB0928DD007600EBE15F /* Preview Assets.xcassets */; };
-		8298FB1128DD02EB00EBE15F /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8298FB1028DD02EB00EBE15F /* Model.swift */; };
+		8298FB1128DD02EB00EBE15F /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8298FB1028DD02EB00EBE15F /* AppState.swift */; };
 		8298FB1528DD036B00EBE15F /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8298FB1428DD036B00EBE15F /* RootView.swift */; };
 		8298FB1828DD03EE00EBE15F /* CounterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8298FB1728DD03EE00EBE15F /* CounterView.swift */; };
 		8298FB1C28DD044F00EBE15F /* Int.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8298FB1B28DD044F00EBE15F /* Int.swift */; };
@@ -31,7 +31,7 @@
 		8298FB0228DD007100EBE15F /* Counter_TCAApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Counter_TCAApp.swift; sourceTree = "<group>"; };
 		8298FB0628DD007600EBE15F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8298FB0928DD007600EBE15F /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		8298FB1028DD02EB00EBE15F /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
+		8298FB1028DD02EB00EBE15F /* AppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
 		8298FB1428DD036B00EBE15F /* RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
 		8298FB1728DD03EE00EBE15F /* CounterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CounterView.swift; sourceTree = "<group>"; };
 		8298FB1B28DD044F00EBE15F /* Int.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Int.swift; sourceTree = "<group>"; };
@@ -77,7 +77,7 @@
 				8298FB2028DD0F7000EBE15F /* Domain */,
 				8298FB1928DD042B00EBE15F /* Common */,
 				8298FB1228DD033800EBE15F /* Modules */,
-				8298FB1028DD02EB00EBE15F /* Model.swift */,
+				8298FB1028DD02EB00EBE15F /* AppState.swift */,
 				8298FB0628DD007600EBE15F /* Assets.xcassets */,
 				8298FB0828DD007600EBE15F /* Preview Content */,
 			);
@@ -250,7 +250,7 @@
 				82889A7F28DD90B200804462 /* Activity.swift in Sources */,
 				8298FB2328DD0FA500EBE15F /* WolframAlphaResult.swift in Sources */,
 				8298FB1528DD036B00EBE15F /* RootView.swift in Sources */,
-				8298FB1128DD02EB00EBE15F /* Model.swift in Sources */,
+				8298FB1128DD02EB00EBE15F /* AppState.swift in Sources */,
 				8298FB1C28DD044F00EBE15F /* Int.swift in Sources */,
 				8298FB0328DD007100EBE15F /* Counter_TCAApp.swift in Sources */,
 				82889A7D28DD907400804462 /* User.swift in Sources */,

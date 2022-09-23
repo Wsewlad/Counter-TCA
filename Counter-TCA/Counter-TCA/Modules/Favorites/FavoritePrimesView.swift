@@ -8,14 +8,14 @@
 import SwiftUI
 
 struct FavoritePrimesView: View {
-    @EnvironmentObject var model: Model
+    @EnvironmentObject var store: Store<AppState>
     
     var body: some View {
         List {
-            ForEach(model.favoritePrimes, id: \.self) { prime in
+            ForEach(self.store.state.favoritePrimes, id: \.self) { prime in
                 Text("\(prime)")
             }
-            .onDelete { model.removeFromFavorites(at: $0) } 
+            .onDelete { self.store.state.removeFromFavorites(at: $0) }
         }
         .navigationTitle("Favorite Primes")
     }

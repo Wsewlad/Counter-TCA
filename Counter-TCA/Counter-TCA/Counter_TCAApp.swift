@@ -9,12 +9,12 @@ import SwiftUI
 
 @main
 struct Counter_TCAApp: App {
-    @StateObject var model = Model()
+    @StateObject var store = Store(state: AppState())
     
     var body: some Scene {
         WindowGroup {
             RootView()
-                .environmentObject(model)
+                .environmentObject(store)
         }
     }
 }

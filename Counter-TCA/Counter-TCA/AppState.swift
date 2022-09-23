@@ -11,16 +11,23 @@ import Collections
 
 let wolframAlphaApiKey = "T8R7LH-X7L2V6G98P"
 
-@MainActor
-final class Model: ObservableObject {
-    @Published private(set) var count: Int = 0
-    @Published private(set) var favoritePrimes: OrderedSet<Int> = []
-    @Published private(set) var loggedInUser: User? = nil
-    @Published private(set) var activityFeed: [Activity] = []
+final class Store<State>: ObservableObject {
+    @Published var state: State
+    
+    init(state: State) {
+        self.state = state
+    }
+}
+
+struct AppState {
+    private(set) var count: Int = 0
+    private(set) var favoritePrimes: OrderedSet<Int> = []
+    private(set) var loggedInUser: User? = nil
+    private(set) var activityFeed: [Activity] = []
 }
 
 //MARK: - Wolfram Alpha
-extension Model {
+extension AppState {
     func wolframAlpha(query: String, callback: @escaping (WolframAlphaResult?) -> Void) -> Void {
         var components = URLComponents(string: "https://api.wolframalpha.com/v2/query")!
         components.queryItems = [
@@ -58,12 +65,12 @@ extension Model {
 }
 
 //MARK: - Favorites
-extension Model {
+extension AppState {
     var isInFavorites: Bool {
         self.favoritePrimes.contains(self.count)
     }
     
-    func toggleFavorites() {
+    mutating func toggleFavorites() {
         if isInFavorites {
             self.favoritePrimes.remove(self.count)
             self.activityFeed.append(.init(timestamp: .now, type: .removeFavoritePrime(self.count)))
@@ -73,7 +80,7 @@ extension Model {
         }
     }
     
-    func removeFromFavorites(at indexSet: IndexSet) {
+    mutating func removeFromFavorites(at indexSet: IndexSet) {
         for index in indexSet {
             self.favoritePrimes.remove(at: index)
             self.activityFeed.append(.init(timestamp: .now, type: .removeFavoritePrime(self.count)))
@@ -82,12 +89,12 @@ extension Model {
 }
 
 //MARK: - Counter
-extension Model {
-    func increment() {
+extension AppState {
+    mutating func increment() {
         count += 1
     }
     
-    func decrement() {
+    mutating func decrement() {
         guard count >= 1 else { return }
         count -= 1
     }

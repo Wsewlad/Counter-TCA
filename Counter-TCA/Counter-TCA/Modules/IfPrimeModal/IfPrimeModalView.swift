@@ -8,12 +8,12 @@
 import SwiftUI
 
 struct IfPrimeModalView: View {
-    @EnvironmentObject var model: Model
+    @EnvironmentObject var store: Store<AppState>
     
     var body: some View {
         VStack {
             Text(title)
-            if model.count.isPrime {
+            if self.store.state.count.isPrime {
                 Button(action: { toggleFavorites() }) {
                     Text(actionTitle)
                 }
@@ -25,18 +25,18 @@ struct IfPrimeModalView: View {
 //MARK: - Actions
 private extension IfPrimeModalView {
     func toggleFavorites() {
-        self.model.toggleFavorites()
+        self.store.state.toggleFavorites()
     }
 }
 
 //MARK: - Computed Properties
 private extension IfPrimeModalView {
     var title: String {
-        model.count.isPrime ? "\(model.count) is prime 🎉" : "\(model.count) is not prime :("
+        self.store.state.count.isPrime ? "\(self.store.state.count) is prime 🎉" : "\(self.store.state.count) is not prime :("
     }
     
     var actionTitle: String {
-        model.isInFavorites ? "Remove from favorite primes" : "Save to favorite primes"
+        self.store.state.isInFavorites ? "Remove from favorite primes" : "Save to favorite primes"
     }
 }
 
