@@ -13,6 +13,7 @@ struct CounterView: View {
     @State private var isPrimeModalShown: Bool = false
     @State private var alertNthPrimePresented: Bool = false
     @State private var alertNthPrime: Int?  = nil
+    @State private var isNthPrimeButtonDisabled: Bool = false
     
     var body: some View {
         VStack {
@@ -61,18 +62,26 @@ private extension CounterView {
 private extension CounterView {
     var buttonsView: some View {
         VStack {
-            Button(action: { isPrimeModalShown.toggle() }) {
+            Button(action: { self.isPrimeModalShown.toggle() }) {
                 Text("Is this prime?")
             }
             
-            Button(action: {
-                model.nthPrime {
-                    self.alertNthPrime = $0
-                    alertNthPrimePresented = true
-                }
-            }) {
+            Button(action: self.nthPrimeButtonAction) {
                 Text("What is the \(model.count.ordinal) prime?")
             }
+            .disabled(self.isNthPrimeButtonDisabled)
+        }
+    }
+}
+
+//MARK: - Actions
+private extension CounterView {
+    func nthPrimeButtonAction() {
+        self.isNthPrimeButtonDisabled = true
+        model.nthPrime {
+            self.alertNthPrime = $0
+            self.alertNthPrimePresented = $0 != nil
+            self.isNthPrimeButtonDisabled = false
         }
     }
 }

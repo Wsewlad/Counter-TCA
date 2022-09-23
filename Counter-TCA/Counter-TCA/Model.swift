@@ -15,6 +15,8 @@ let wolframAlphaApiKey = "T8R7LH-X7L2V6G98P"
 final class Model: ObservableObject {
     @Published private(set) var count: Int = 0
     @Published private(set) var favoritePrimes: OrderedSet<Int> = []
+    @Published private(set) var loggedInUser: User? = nil
+    @Published private(set) var activityFeed: [Activity] = []
 }
 
 //MARK: - Wolfram Alpha
@@ -58,20 +60,23 @@ extension Model {
 //MARK: - Favorites
 extension Model {
     var isInFavorites: Bool {
-        favoritePrimes.contains(self.count)
+        self.favoritePrimes.contains(self.count)
     }
     
     func toggleFavorites() {
         if isInFavorites {
-            favoritePrimes.remove(self.count)
+            self.favoritePrimes.remove(self.count)
+            self.activityFeed.append(.init(timestamp: .now, type: .removeFavoritePrime(self.count)))
         } else {
-            favoritePrimes.append(self.count)
+            self.favoritePrimes.append(self.count)
+            self.activityFeed.append(.init(timestamp: .now, type: .addedFavoritePrime(self.count)))
         }
     }
     
-    func removeFromFavorites(on indexSet: IndexSet) {
+    func removeFromFavorites(at indexSet: IndexSet) {
         for index in indexSet {
             self.favoritePrimes.remove(at: index)
+            self.activityFeed.append(.init(timestamp: .now, type: .removeFavoritePrime(self.count)))
         }
     }
 }

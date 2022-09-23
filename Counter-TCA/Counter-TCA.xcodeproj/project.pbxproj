@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		82889A7D28DD907400804462 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82889A7C28DD907400804462 /* User.swift */; };
+		82889A7F28DD90B200804462 /* Activity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82889A7E28DD90B200804462 /* Activity.swift */; };
 		8298FB0328DD007100EBE15F /* Counter_TCAApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8298FB0228DD007100EBE15F /* Counter_TCAApp.swift */; };
 		8298FB0728DD007600EBE15F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8298FB0628DD007600EBE15F /* Assets.xcassets */; };
 		8298FB0A28DD007600EBE15F /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8298FB0928DD007600EBE15F /* Preview Assets.xcassets */; };
@@ -23,6 +25,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		82889A7C28DD907400804462 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		82889A7E28DD90B200804462 /* Activity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Activity.swift; sourceTree = "<group>"; };
 		8298FAFF28DD007100EBE15F /* Counter-TCA.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Counter-TCA.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8298FB0228DD007100EBE15F /* Counter_TCAApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Counter_TCAApp.swift; sourceTree = "<group>"; };
 		8298FB0628DD007600EBE15F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -151,6 +155,8 @@
 			isa = PBXGroup;
 			children = (
 				8298FB2228DD0FA500EBE15F /* WolframAlphaResult.swift */,
+				82889A7C28DD907400804462 /* User.swift */,
+				82889A7E28DD90B200804462 /* Activity.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -241,11 +247,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				82889A7F28DD90B200804462 /* Activity.swift in Sources */,
 				8298FB2328DD0FA500EBE15F /* WolframAlphaResult.swift in Sources */,
 				8298FB1528DD036B00EBE15F /* RootView.swift in Sources */,
 				8298FB1128DD02EB00EBE15F /* Model.swift in Sources */,
 				8298FB1C28DD044F00EBE15F /* Int.swift in Sources */,
 				8298FB0328DD007100EBE15F /* Counter_TCAApp.swift in Sources */,
+				82889A7D28DD907400804462 /* User.swift in Sources */,
 				8298FB1828DD03EE00EBE15F /* CounterView.swift in Sources */,
 				8298FB2628DD1B0300EBE15F /* FavoritePrimesView.swift in Sources */,
 				8298FB1F28DD09C200EBE15F /* IfPrimeModalView.swift in Sources */,

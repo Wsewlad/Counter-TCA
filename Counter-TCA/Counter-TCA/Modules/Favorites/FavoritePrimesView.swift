@@ -15,7 +15,7 @@ struct FavoritePrimesView: View {
             ForEach(model.favoritePrimes, id: \.self) { prime in
                 Text("\(prime)")
             }
-            .onDelete { model.removeFromFavorites(on: $0) } 
+            .onDelete { model.removeFromFavorites(at: $0) } 
         }
         .navigationTitle("Favorite Primes")
     }

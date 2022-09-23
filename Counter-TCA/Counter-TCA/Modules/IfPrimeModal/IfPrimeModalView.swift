@@ -14,11 +14,18 @@ struct IfPrimeModalView: View {
         VStack {
             Text(title)
             if model.count.isPrime {
-                Button(action: { model.toggleFavorites() }) {
+                Button(action: { toggleFavorites() }) {
                     Text(actionTitle)
                 }
             }
         }
+    }
+}
+
+//MARK: - Actions
+private extension IfPrimeModalView {
+    func toggleFavorites() {
+        self.model.toggleFavorites()
     }
 }
 
