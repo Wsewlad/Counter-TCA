@@ -7,6 +7,22 @@
 
 import SwiftUI
 
+enum CounterAction {
+    case decrTapped
+    case incrTapped
+}
+
+func counterReducer(state: AppState, action: CounterAction) -> AppState {
+    var copy = state
+    switch action {
+    case .decrTapped:
+        copy.count -= 1
+    case .incrTapped:
+        copy.count += 1
+    }
+    return copy
+}
+
 struct CounterView: View {
     @EnvironmentObject var store: Store<AppState>
     

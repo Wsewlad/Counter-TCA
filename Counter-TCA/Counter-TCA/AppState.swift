@@ -20,10 +20,10 @@ final class Store<State>: ObservableObject {
 }
 
 struct AppState {
-    private(set) var count: Int = 0
-    private(set) var favoritePrimes: OrderedSet<Int> = []
-    private(set) var loggedInUser: User? = nil
-    private(set) var activityFeed: [Activity] = []
+    var count: Int = 0
+    var favoritePrimes: OrderedSet<Int> = []
+    var loggedInUser: User? = nil
+    var activityFeed: [Activity] = []
 }
 
 //MARK: - Wolfram Alpha
