@@ -9,7 +9,7 @@ import SwiftUI
 
 @main
 struct Counter_TCAApp: App {
-    @StateObject var store = Store(state: AppState())
+    @StateObject var store = Store(state: AppState(), reducer: appReducer)
     
     var body: some Scene {
         WindowGroup {

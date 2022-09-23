@@ -7,11 +7,33 @@
 
 import Foundation
 
+enum AppAction {
+    case counter(CounterAction)
+    case primeModal(PrimeModalAction)
+    case favoritePrimes(FavoritePrimesAction)
+}
+
+enum CounterAction {
+    case decrTapped
+    case incrTapped
+}
+
+enum PrimeModalAction {
+    case saveFavoritePrimeTapped
+    case removeFavoritePrimeTapped
+}
+
+enum FavoritePrimesAction {
+    case deleteFavoritePrimes(IndexSet)
+}
+
+
+
+
 enum Actions {
     struct IncrementCounter: EquatableAction {}
     struct DecrementCounter: EquatableAction {}
 }
-
 
 typealias EquatableAction = Equatable & Actionable
 

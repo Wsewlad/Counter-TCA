@@ -7,24 +7,8 @@
 
 import SwiftUI
 
-enum CounterAction {
-    case decrTapped
-    case incrTapped
-}
-
-func counterReducer(state: AppState, action: CounterAction) -> AppState {
-    var copy = state
-    switch action {
-    case .decrTapped:
-        copy.count -= 1
-    case .incrTapped:
-        copy.count += 1
-    }
-    return copy
-}
-
 struct CounterView: View {
-    @EnvironmentObject var store: Store<AppState>
+    @EnvironmentObject var store: Store<AppState, AppAction>
     
     @State private var isPrimeModalShown: Bool = false
     @State private var alertNthPrimePresented: Bool = false
@@ -61,15 +45,11 @@ struct CounterView: View {
 private extension CounterView {
     var stepperView: some View {
         HStack {
-            Button(action: { self.store.state.decrement() }) {
-                Text("-")
-            }
+            Button("-") { self.store.send(.counter(.decrTapped)) }
             
             Text("\(self.store.state.count)")
             
-            Button(action: { self.store.state.increment() }) {
-                Text("+")
-            }
+            Button("+") { self.store.send(.counter(.incrTapped)) }
         }
     }
 }

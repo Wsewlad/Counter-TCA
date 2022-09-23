@@ -11,19 +11,15 @@ import Collections
 
 let wolframAlphaApiKey = "T8R7LH-X7L2V6G98P"
 
-final class Store<State>: ObservableObject {
-    @Published var state: State
-    
-    init(state: State) {
-        self.state = state
-    }
-}
-
 struct AppState {
     var count: Int = 0
     var favoritePrimes: OrderedSet<Int> = []
     var loggedInUser: User? = nil
     var activityFeed: [Activity] = []
+    
+    var isInFavorites: Bool {
+        self.favoritePrimes.contains(self.count)
+    }
 }
 
 //MARK: - Wolfram Alpha
@@ -61,41 +57,5 @@ extension AppState {
                     .flatMap(Int.init)
             )
         }
-    }
-}
-
-//MARK: - Favorites
-extension AppState {
-    var isInFavorites: Bool {
-        self.favoritePrimes.contains(self.count)
-    }
-    
-    mutating func toggleFavorites() {
-        if isInFavorites {
-            self.favoritePrimes.remove(self.count)
-            self.activityFeed.append(.init(timestamp: .now, type: .removeFavoritePrime(self.count)))
-        } else {
-            self.favoritePrimes.append(self.count)
-            self.activityFeed.append(.init(timestamp: .now, type: .addedFavoritePrime(self.count)))
-        }
-    }
-    
-    mutating func removeFromFavorites(at indexSet: IndexSet) {
-        for index in indexSet {
-            self.favoritePrimes.remove(at: index)
-            self.activityFeed.append(.init(timestamp: .now, type: .removeFavoritePrime(self.count)))
-        }
-    }
-}
-
-//MARK: - Counter
-extension AppState {
-    mutating func increment() {
-        count += 1
-    }
-    
-    mutating func decrement() {
-        guard count >= 1 else { return }
-        count -= 1
     }
 }
