@@ -12,6 +12,7 @@
 		82889A8128DD9EDF00804462 /* Actions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82889A8028DD9EDF00804462 /* Actions.swift */; };
 		82889A8728DE0A4800804462 /* Store.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82889A8628DE0A4800804462 /* Store.swift */; };
 		82889A8D28DE511500804462 /* Reducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82889A8C28DE511500804462 /* Reducer.swift */; };
+		82889A9028DF7AA700804462 /* Overture in Frameworks */ = {isa = PBXBuildFile; productRef = 82889A8F28DF7AA700804462 /* Overture */; };
 		8298FB0328DD007100EBE15F /* Counter_TCAApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8298FB0228DD007100EBE15F /* Counter_TCAApp.swift */; };
 		8298FB0728DD007600EBE15F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8298FB0628DD007600EBE15F /* Assets.xcassets */; };
 		8298FB0A28DD007600EBE15F /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8298FB0928DD007600EBE15F /* Preview Assets.xcassets */; };
@@ -51,6 +52,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				82889A9028DF7AA700804462 /* Overture in Frameworks */,
 				8298FB2928DD1D9700EBE15F /* Collections in Frameworks */,
 				8298FB2B28DD1D9700EBE15F /* DequeModule in Frameworks */,
 				8298FB2D28DD1D9700EBE15F /* OrderedCollections in Frameworks */,
@@ -198,6 +200,7 @@
 				8298FB2828DD1D9700EBE15F /* Collections */,
 				8298FB2A28DD1D9700EBE15F /* DequeModule */,
 				8298FB2C28DD1D9700EBE15F /* OrderedCollections */,
+				82889A8F28DF7AA700804462 /* Overture */,
 			);
 			productName = "Counter-TCA";
 			productReference = 8298FAFF28DD007100EBE15F /* Counter-TCA.app */;
@@ -229,6 +232,7 @@
 			mainGroup = 8298FAF628DD007100EBE15F;
 			packageReferences = (
 				8298FB2728DD1D9700EBE15F /* XCRemoteSwiftPackageReference "swift-collections" */,
+				82889A8E28DF7AA500804462 /* XCRemoteSwiftPackageReference "swift-overture" */,
 			);
 			productRefGroup = 8298FB0028DD007100EBE15F /* Products */;
 			projectDirPath = "";
@@ -471,6 +475,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		82889A8E28DF7AA500804462 /* XCRemoteSwiftPackageReference "swift-overture" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/pointfreeco/swift-overture";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.5.0;
+			};
+		};
 		8298FB2728DD1D9700EBE15F /* XCRemoteSwiftPackageReference "swift-collections" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/apple/swift-collections.git";
@@ -482,6 +494,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		82889A8F28DF7AA700804462 /* Overture */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 82889A8E28DF7AA500804462 /* XCRemoteSwiftPackageReference "swift-overture" */;
+			productName = Overture;
+		};
 		8298FB2828DD1D9700EBE15F /* Collections */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 8298FB2728DD1D9700EBE15F /* XCRemoteSwiftPackageReference "swift-collections" */;

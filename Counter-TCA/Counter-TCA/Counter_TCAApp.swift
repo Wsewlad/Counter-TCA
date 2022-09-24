@@ -10,7 +10,7 @@ import SwiftUI
 let _appReducer: (inout AppState, AppAction) -> Void = combine(
     transform(counterReducer, state: \.count, action: \.counter),
     transform(primeModalReducer, state: \.self, action: \.primeModal),
-    transform(favoritePrimesReducer, state: \.favoritePrimesState, action: \.favoritePrimes)
+    transform(favoritePrimesReducer, state: \.favoritePrimesState.favoritePrimes, action: \.favoritePrimes)
 )
 
 let appReducer = transform(_appReducer, state: \.self, action: \.self)

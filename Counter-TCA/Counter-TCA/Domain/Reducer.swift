@@ -26,11 +26,11 @@ func primeModalReducer(state: inout AppState, action: PrimeModalAction) {
     }
 }
 
-func favoritePrimesReducer(state: inout FavoritePrimesState, action: FavoritePrimesAction) {
+func favoritePrimesReducer(state: inout OrderedSet<Int>, action: FavoritePrimesAction) {
     switch action {
     case .deleteFavoritePrimes(let indexSet):
         for index in indexSet {
-            state.favoritePrimes.remove(at: index)
+            state.remove(at: index)
         }
     }
 }
