@@ -12,7 +12,7 @@ struct Activity {
     let type: ActivityType
     
     enum ActivityType {
-        case addedFavoritePrime(Int)
-        case removeFavoritePrime(Int)
+        case saveFavoritePrimeTapped(Int)
+        case removedFavoritePrime(Int)
     }
 }

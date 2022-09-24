@@ -8,41 +8,34 @@
 import Foundation
 import Collections
 
-func counterReducer(state: inout Int, action: AppAction) {
+func counterReducer(state: inout Int, action: CounterAction) {
     switch action {
-    case .counter(.decrTapped):
+    case .decrTapped:
         state -= 1
-    case .counter(.incrTapped):
+    case .incrTapped:
         state += 1
-    default:
-        break
     }
 }
 
-func primeModalReducer(state: inout AppState, action: AppAction) {
+func primeModalReducer(state: inout AppState, action: PrimeModalAction) {
     switch action {
-    case .primeModal(.saveFavoritePrimeTapped):
+    case .saveFavoritePrimeTapped:
         state.favoritePrimesState.favoritePrimes.append(state.count)
-        state.favoritePrimesState.activityFeed.append(.init(timestamp: .now, type: .addedFavoritePrime(state.count)))
+//        state.favoritePrimesState.activityFeed.append(.init(timestamp: .now, type: .addedFavoritePrime(state.count)))
         
-    case .primeModal(.removeFavoritePrimeTapped):
+    case .removeFavoritePrimeTapped:
         state.favoritePrimesState.favoritePrimes.remove(state.count)
-        state.favoritePrimesState.activityFeed.append(.init(timestamp: .now, type: .removeFavoritePrime(state.count)))
-        
-    default:
-        break
+//        state.favoritePrimesState.activityFeed.append(.init(timestamp: .now, type: .removeFavoritePrime(state.count)))
     }
 }
 
-func favoritePrimesReducer(state: inout FavoritePrimesState, action: AppAction) {
+func favoritePrimesReducer(state: inout FavoritePrimesState, action: FavoritePrimesAction) {
     switch action {
-    case .favoritePrimes(.deleteFavoritePrimes(let indexSet)):
+    case .deleteFavoritePrimes(let indexSet):
         for index in indexSet {
-            let prime = state.favoritePrimes[index]
+//            let prime = state.favoritePrimes[index]
             state.favoritePrimes.remove(at: index)
-            state.activityFeed.append(.init(timestamp: .now, type: .removeFavoritePrime(prime)))
+//            state.activityFeed.append(.init(timestamp: .now, type: .removeFavoritePrime(prime)))
         }
-    default:
-        break
     }
 }

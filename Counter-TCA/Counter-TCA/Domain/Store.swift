@@ -31,11 +31,59 @@ func combine<State, Action>(
     }
 }
 
-func transform<GlobalState, LocalState, Action>(
-  _ localReducer: @escaping (inout LocalState, Action) -> Void,
-  localValueKeyPath: WritableKeyPath<GlobalState, LocalState>
-) -> (inout GlobalState, Action) -> Void {
-  return { globalValue, action in
-    localReducer(&globalValue[keyPath: localValueKeyPath], action)
-  }
+func transform<GlobalState, LocalState, GlobalAction, LocalAction>(
+    _ localReducer: @escaping (inout LocalState, LocalAction) -> Void,
+    state: WritableKeyPath<GlobalState, LocalState>,
+    action: WritableKeyPath<GlobalAction, LocalAction?>
+) -> (inout GlobalState, GlobalAction) -> Void {
+    return { globalState, globalAction in
+        guard let localAction = globalAction[keyPath: action] else { return }
+        localReducer(&globalState[keyPath: state], localAction)
+    }
+}
+
+func logging<State, Action>(
+  _ reducer: @escaping (inout State, Action) -> Void
+) -> (inout State, Action) -> Void {
+    return { state, action in
+        reducer(&state, action)
+        print("Action: \(action)")
+        print("State:")
+        dump(state)
+        print("---")
+    }
+}
+
+
+func activityFeed(
+  _ reducer: @escaping (inout AppState, AppAction) -> Void
+) -> (inout AppState, AppAction) -> Void {
+    return { state, action in
+        switch action {
+        case .counter:
+            break
+
+        case .primeModal(.removeFavoritePrimeTapped):
+            state.favoritePrimesState.activityFeed.append(
+                .init(timestamp: Date(), type: .removedFavoritePrime(state.count))
+            )
+
+        case .primeModal(.saveFavoritePrimeTapped):
+            state.favoritePrimesState.activityFeed.append(
+                .init(timestamp: Date(), type: .saveFavoritePrimeTapped(state.count))
+            )
+
+        case let .favoritePrimes(.deleteFavoritePrimes(indexSet)):
+            for index in indexSet {
+                state.favoritePrimesState.activityFeed.append(
+                    .init(
+                        timestamp: Date(),
+                        type: .removedFavoritePrime(state.favoritePrimesState.favoritePrimes[index])
+                    )
+                )
+            }
+        }
+        
+        reducer(&state, action)
+    }
 }
