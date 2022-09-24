@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Overture
 
 let _appReducer: (inout AppState, AppAction) -> Void = combine(
     transform(counterReducer, state: \.count, action: \.counter),
@@ -20,7 +21,13 @@ struct Counter_TCAApp: App {
     
     @StateObject var store = Store(
         state: AppState(),
-        reducer: logging(activityFeed(appReducer))
+        reducer: with(
+            appReducer,
+            compose(
+                logging,
+                activityFeed
+            )
+        )
     )
     
     var body: some Scene {
