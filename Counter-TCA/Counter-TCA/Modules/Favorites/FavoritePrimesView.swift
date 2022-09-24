@@ -12,7 +12,7 @@ struct FavoritePrimesView: View {
     
     var body: some View {
         List {
-            ForEach(self.store.state.favoritePrimes, id: \.self) { prime in
+            ForEach(self.store.state.favoritePrimesState.favoritePrimes, id: \.self) { prime in
                 Text("\(prime)")
             }
             .onDelete { self.store.send(.favoritePrimes(.deleteFavoritePrimes($0))) }

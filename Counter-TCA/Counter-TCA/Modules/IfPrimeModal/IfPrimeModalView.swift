@@ -33,7 +33,7 @@ private extension IfPrimeModalView {
     }
     
     var isInFavorites: Bool {
-        self.store.state.favoritePrimes.contains(self.store.state.count)
+        self.store.state.favoritePrimesState.favoritePrimes.contains(self.store.state.count)
     }
 }
 

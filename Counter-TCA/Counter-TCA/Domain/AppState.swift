@@ -14,18 +14,8 @@ let wolframAlphaApiKey = "T8R7LH-X7L2V6G98P"
 struct AppState {
     var count: Int = 0
     var loggedInUser: User? = nil
-    var favoritePrimes: OrderedSet<Int> = []
-    var activityFeed: [Activity] = []
     
-    var favoritePrimesState: FavoritePrimesState {
-        get {
-            .init(favoritePrimes: self.favoritePrimes, activityFeed: self.activityFeed)
-        }
-        set {
-            self.favoritePrimes = newValue.favoritePrimes
-            self.activityFeed = newValue.activityFeed
-        }
-    }
+    var favoritePrimesState: FavoritePrimesState = .init()
 }
 
 struct FavoritePrimesState {

@@ -22,12 +22,12 @@ func counterReducer(state: inout Int, action: AppAction) {
 func primeModalReducer(state: inout AppState, action: AppAction) {
     switch action {
     case .primeModal(.saveFavoritePrimeTapped):
-        state.favoritePrimes.append(state.count)
-        state.activityFeed.append(.init(timestamp: .now, type: .addedFavoritePrime(state.count)))
+        state.favoritePrimesState.favoritePrimes.append(state.count)
+        state.favoritePrimesState.activityFeed.append(.init(timestamp: .now, type: .addedFavoritePrime(state.count)))
         
     case .primeModal(.removeFavoritePrimeTapped):
-        state.favoritePrimes.remove(state.count)
-        state.activityFeed.append(.init(timestamp: .now, type: .removeFavoritePrime(state.count)))
+        state.favoritePrimesState.favoritePrimes.remove(state.count)
+        state.favoritePrimesState.activityFeed.append(.init(timestamp: .now, type: .removeFavoritePrime(state.count)))
         
     default:
         break
