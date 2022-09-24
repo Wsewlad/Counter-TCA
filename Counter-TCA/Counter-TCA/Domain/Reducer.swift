@@ -21,11 +21,8 @@ func primeModalReducer(state: inout AppState, action: PrimeModalAction) {
     switch action {
     case .saveFavoritePrimeTapped:
         state.favoritePrimesState.favoritePrimes.append(state.count)
-//        state.favoritePrimesState.activityFeed.append(.init(timestamp: .now, type: .addedFavoritePrime(state.count)))
-        
     case .removeFavoritePrimeTapped:
         state.favoritePrimesState.favoritePrimes.remove(state.count)
-//        state.favoritePrimesState.activityFeed.append(.init(timestamp: .now, type: .removeFavoritePrime(state.count)))
     }
 }
 
@@ -33,9 +30,7 @@ func favoritePrimesReducer(state: inout FavoritePrimesState, action: FavoritePri
     switch action {
     case .deleteFavoritePrimes(let indexSet):
         for index in indexSet {
-//            let prime = state.favoritePrimes[index]
             state.favoritePrimes.remove(at: index)
-//            state.activityFeed.append(.init(timestamp: .now, type: .removeFavoritePrime(prime)))
         }
     }
 }
