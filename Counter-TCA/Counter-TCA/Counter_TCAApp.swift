@@ -8,7 +8,7 @@
 import SwiftUI
 
 let _appReducer: (inout AppState, AppAction) -> Void = combine(
-    logging(transform(counterReducer, state: \.count, action: \.counter)),
+    transform(counterReducer, state: \.count, action: \.counter),
     transform(primeModalReducer, state: \.self, action: \.primeModal),
     transform(favoritePrimesReducer, state: \.favoritePrimesState, action: \.favoritePrimes)
 )
@@ -20,7 +20,7 @@ struct Counter_TCAApp: App {
     
     @StateObject var store = Store(
         state: AppState(),
-        reducer: activityFeed(appReducer)
+        reducer: logging(activityFeed(appReducer))
     )
     
     var body: some Scene {
