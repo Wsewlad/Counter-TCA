@@ -7,11 +7,15 @@
 
 import SwiftUI
 import Overture
+import ComposableArchitecture
+import FavoritePrimes
+import Counter
+import PrimeModal
 
 let _appReducer: (inout AppState, AppAction) -> Void = combine(
     transform(counterReducer, state: \.count, action: \.counter),
-    transform(primeModalReducer, state: \.self, action: \.primeModal),
-    transform(favoritePrimesReducer, state: \.favoritePrimesState.favoritePrimes, action: \.favoritePrimes)
+    transform(primeModalReducer, state: \.primeModal, action: \.primeModal),
+    transform(favoritePrimesReducer, state: \.favoritePrimes, action: \.favoritePrimes)
 )
 
 let appReducer = transform(_appReducer, state: \.self, action: \.self)

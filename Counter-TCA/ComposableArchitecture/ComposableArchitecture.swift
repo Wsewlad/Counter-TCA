@@ -1,28 +1,29 @@
 //
-//  Store.swift
-//  Counter-TCA
+//  ComposableArchitecture.swift
+//  ComposableArchitecture
 //
-//  Created by  Vladyslav Fil on 23.09.2022.
+//  Created by  Vladyslav Fil on 24.09.2022.
 //
 
 import SwiftUI
+import Combine
 
-final class Store<State, Action>: ObservableObject {
-    let reducer: (inout State, Action) -> Void
-    @Published private(set) var state: State
+public final class Store<State, Action>: ObservableObject {
+    private let reducer: (inout State, Action) -> Void
+    @Published public private(set) var state: State
     
-    init(state: State, reducer: @escaping (inout State, Action) -> Void) {
+    public init(state: State, reducer: @escaping (inout State, Action) -> Void) {
         self.state = state
         self.reducer = reducer
     }
     
-    func send(_ action: Action) {
+    public func send(_ action: Action) {
         self.reducer(&self.state, action)
     }
 }
 
 //MARK: - combine
-func combine<State, Action>(
+public func combine<State, Action>(
   _ reducers: (inout State, Action) -> Void...
 ) -> (inout State, Action) -> Void {
     return { state, action in
@@ -33,7 +34,7 @@ func combine<State, Action>(
 }
 
 //MARK: - transform
-func transform<GlobalState, LocalState, GlobalAction, LocalAction>(
+public func transform<GlobalState, LocalState, GlobalAction, LocalAction>(
     _ localReducer: @escaping (inout LocalState, LocalAction) -> Void,
     state: WritableKeyPath<GlobalState, LocalState>,
     action: WritableKeyPath<GlobalAction, LocalAction?>
@@ -45,7 +46,7 @@ func transform<GlobalState, LocalState, GlobalAction, LocalAction>(
 }
 
 //MARK: - logging
-func logging<State, Action>(
+public func logging<State, Action>(
   _ reducer: @escaping (inout State, Action) -> Void
 ) -> (inout State, Action) -> Void {
     return { state, action in
@@ -58,7 +59,7 @@ func logging<State, Action>(
 }
 
 //MARK: - filter Actions
-func filterActions<State, Action>(_ predicate: @escaping (Action) -> Bool)
+public func filterActions<State, Action>(_ predicate: @escaping (Action) -> Bool)
   -> (@escaping (inout State, Action) -> Void)
   -> (inout State, Action) -> Void {
       return { reducer in
@@ -109,39 +110,5 @@ func undo<Value, Action>(
             undoState.history.append(undoState.state)
             undoState.state = undoState.undone.removeFirst()
         }
-    }
-}
-
-//MARK: - activity Feed
-func activityFeed(
-    _ reducer: @escaping (inout AppState, AppAction) -> Void
-) -> (inout AppState, AppAction) -> Void {
-    return { state, action in
-        switch action {
-        case .counter:
-            break
-
-        case .primeModal(.removeFavoritePrimeTapped):
-            state.favoritePrimesState.activityFeed.append(
-                .init(timestamp: Date(), type: .removedFavoritePrime(state.count))
-            )
-
-        case .primeModal(.saveFavoritePrimeTapped):
-            state.favoritePrimesState.activityFeed.append(
-                .init(timestamp: Date(), type: .saveFavoritePrimeTapped(state.count))
-            )
-
-        case let .favoritePrimes(.deleteFavoritePrimes(indexSet)):
-            for index in indexSet {
-                state.favoritePrimesState.activityFeed.append(
-                    .init(
-                        timestamp: Date(),
-                        type: .removedFavoritePrime(state.favoritePrimesState.favoritePrimes[index])
-                    )
-                )
-            }
-        }
-        
-        reducer(&state, action)
     }
 }

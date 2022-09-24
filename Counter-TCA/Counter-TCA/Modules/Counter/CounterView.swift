@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import ComposableArchitecture
 
 struct CounterView: View {
     @EnvironmentObject var store: Store<AppState, AppAction>
