@@ -11,6 +11,7 @@ import Combine
 public final class Store<State, Action>: ObservableObject {
     private let reducer: (inout State, Action) -> Void
     @Published public private(set) var state: State
+    private var cancellable: Cancellable?
     
     public init(state: State, reducer: @escaping (inout State, Action) -> Void) {
         self.state = state
@@ -23,16 +24,20 @@ public final class Store<State, Action>: ObservableObject {
 }
 
 extension Store {
-    func view<LocalState>(
+    public func view<LocalState>(
         _ f: @escaping (State) -> LocalState
     ) -> Store<LocalState, Action> {
-        return Store<LocalState, Action>(
+        let localStore = Store<LocalState, Action>(
             state: f(self.state),
             reducer: { localState, action  in
                 self.send(action)
                 localState = f(self.state)
             }
         )
+        localStore.cancellable = self.$state.sink { [weak localStore] newState in
+            localStore?.state = f(newState)
+        }
+        return localStore
     }
 }
 
