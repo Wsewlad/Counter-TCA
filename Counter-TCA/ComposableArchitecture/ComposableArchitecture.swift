@@ -22,6 +22,20 @@ public final class Store<State, Action>: ObservableObject {
     }
 }
 
+extension Store {
+    func view<LocalState>(
+        _ f: @escaping (State) -> LocalState
+    ) -> Store<LocalState, Action> {
+        return Store<LocalState, Action>(
+            state: f(self.state),
+            reducer: { localState, action  in
+                self.send(action)
+                localState = f(self.state)
+            }
+        )
+    }
+}
+
 //MARK: - combine
 public func combine<State, Action>(
   _ reducers: (inout State, Action) -> Void...

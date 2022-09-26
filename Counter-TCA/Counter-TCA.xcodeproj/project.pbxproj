@@ -157,6 +157,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		8285A1E628E238800057425D /* Counter.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = Counter.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		82889A7C28DD907400804462 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		82889A7E28DD90B200804462 /* Activity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Activity.swift; sourceTree = "<group>"; };
 		82889A8028DD9EDF00804462 /* AppAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppAction.swift; sourceTree = "<group>"; };
@@ -352,6 +353,7 @@
 		8298FAF628DD007100EBE15F = {
 			isa = PBXGroup;
 			children = (
+				8285A1E628E238800057425D /* Counter.playground */,
 				8298FB0128DD007100EBE15F /* Counter-TCA */,
 				82889A9728DF952100804462 /* Counter */,
 				82889AA328DF952200804462 /* CounterTests */,
