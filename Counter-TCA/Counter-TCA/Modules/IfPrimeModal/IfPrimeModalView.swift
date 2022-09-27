@@ -7,9 +7,10 @@
 
 import SwiftUI
 import ComposableArchitecture
+import PrimeModal
 
 struct IfPrimeModalView: View {
-    @EnvironmentObject var store: Store<AppState, AppAction>
+    @EnvironmentObject var store: Store<PrimeModalState, AppAction>
     
     var body: some View {
         VStack {

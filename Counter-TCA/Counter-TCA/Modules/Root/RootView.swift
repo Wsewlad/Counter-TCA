@@ -6,17 +6,24 @@
 //
 
 import SwiftUI
+import ComposableArchitecture
 
 struct RootView: View {
+    @EnvironmentObject var store: Store<AppState, AppAction>
+    
     var body: some View {
         NavigationView {
             List {
-                NavigationLink(destination: CounterView()) {
-                    Text("Counter demo")
-                }
-                NavigationLink(destination: FavoritePrimesView()) {
-                    Text("Favorite primes")
-                }
+                NavigationLink(
+                    "Counter demo",
+                    destination: CounterView()
+                        .environmentObject(store.view { ($0.count, $0.favoritePrimes) })
+                )
+                NavigationLink(
+                    "Favorite primes",
+                    destination: FavoritePrimesView()
+                        .environmentObject(store.view { $0.favoritePrimes })
+                )
             }
             .navigationTitle("State management")
         }

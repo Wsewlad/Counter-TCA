@@ -22,7 +22,7 @@ struct AppState {
 extension AppState {
     var primeModal: PrimeModalState {
         get {
-            .init(count: self.count, favoritePrimes: self.favoritePrimes)
+            (self.count, favoritePrimes: self.favoritePrimes)
         }
         set {
             self.count = newValue.count

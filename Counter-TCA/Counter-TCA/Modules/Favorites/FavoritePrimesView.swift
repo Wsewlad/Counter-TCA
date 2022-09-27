@@ -7,13 +7,14 @@
 
 import SwiftUI
 import ComposableArchitecture
+import Collections
 
 struct FavoritePrimesView: View {
-    @EnvironmentObject var store: Store<AppState, AppAction>
+    @EnvironmentObject var store: Store<OrderedSet<Int>, AppAction>
     
     var body: some View {
         List {
-            ForEach(self.store.state.favoritePrimes, id: \.self) { prime in
+            ForEach(self.store.state, id: \.self) { prime in
                 Text("\(prime)")
             }
             .onDelete { self.store.send(.favoritePrimes(.deleteFavoritePrimes($0))) }

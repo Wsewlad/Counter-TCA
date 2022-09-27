@@ -7,6 +7,9 @@
 
 import SwiftUI
 import ComposableArchitecture
+import Collections
+
+typealias CounterViewState = (count: Int, favoritePrimes: OrderedSet<Int>)
 
 struct CounterView: View {
     @EnvironmentObject var store: Store<AppState, AppAction>
@@ -38,6 +41,7 @@ struct CounterView: View {
         .navigationTitle("Counter demo")
         .sheet(isPresented: $isPrimeModalShown) {
             IfPrimeModalView()
+                .environmentObject(store.view { ($0.count, $0.favoritePrimes) })
         }
     }
 }
