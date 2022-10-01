@@ -17,7 +17,6 @@ struct RootView: View {
                 NavigationLink(
                     "Counter demo",
                     destination: CounterView()
-                        .environmentObject(store.view { ($0.count, $0.favoritePrimes) })
                 )
                 NavigationLink(
                     "Favorite primes",

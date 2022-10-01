@@ -10,16 +10,6 @@ import Collections
 
 public typealias PrimeModalState = (count: Int, favoritePrimes: OrderedSet<Int>)
 
-//public struct PrimeModalState {
-//    public var count: Int
-//    public var favoritePrimes: OrderedSet<Int>
-//    
-//    public init(count: Int,favoritePrimes: OrderedSet<Int>) {
-//        self.count = count
-//        self.favoritePrimes = favoritePrimes
-//    }
-//}
-
 public enum PrimeModalAction {
     case saveFavoritePrimeTapped
     case removeFavoritePrimeTapped

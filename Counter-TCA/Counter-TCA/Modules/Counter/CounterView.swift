@@ -41,7 +41,7 @@ struct CounterView: View {
         .navigationTitle("Counter demo")
         .sheet(isPresented: $isPrimeModalShown) {
             IfPrimeModalView()
-                .environmentObject(store.view { ($0.count, $0.favoritePrimes) })
+                .environmentObject(store.view { $0.primeModal })
         }
     }
 }
