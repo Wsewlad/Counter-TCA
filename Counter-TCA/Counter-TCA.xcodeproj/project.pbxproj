@@ -42,14 +42,11 @@
 		8298FB0A28DD007600EBE15F /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8298FB0928DD007600EBE15F /* Preview Assets.xcassets */; };
 		8298FB1128DD02EB00EBE15F /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8298FB1028DD02EB00EBE15F /* AppState.swift */; };
 		8298FB1528DD036B00EBE15F /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8298FB1428DD036B00EBE15F /* RootView.swift */; };
-		8298FB1828DD03EE00EBE15F /* CounterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8298FB1728DD03EE00EBE15F /* CounterView.swift */; };
-		8298FB1C28DD044F00EBE15F /* Int.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8298FB1B28DD044F00EBE15F /* Int.swift */; };
-		8298FB1F28DD09C200EBE15F /* IfPrimeModalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8298FB1E28DD09C200EBE15F /* IfPrimeModalView.swift */; };
 		8298FB2328DD0FA500EBE15F /* WolframAlphaResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8298FB2228DD0FA500EBE15F /* WolframAlphaResult.swift */; };
-		8298FB2628DD1B0300EBE15F /* FavoritePrimesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8298FB2528DD1B0300EBE15F /* FavoritePrimesView.swift */; };
 		8298FB2928DD1D9700EBE15F /* Collections in Frameworks */ = {isa = PBXBuildFile; productRef = 8298FB2828DD1D9700EBE15F /* Collections */; };
 		8298FB2B28DD1D9700EBE15F /* DequeModule in Frameworks */ = {isa = PBXBuildFile; productRef = 8298FB2A28DD1D9700EBE15F /* DequeModule */; };
 		8298FB2D28DD1D9700EBE15F /* OrderedCollections in Frameworks */ = {isa = PBXBuildFile; productRef = 8298FB2C28DD1D9700EBE15F /* OrderedCollections */; };
+		82FA0B8428E8C9D5009D61F0 /* OrderedCollections in Frameworks */ = {isa = PBXBuildFile; productRef = 82FA0B8328E8C9D5009D61F0 /* OrderedCollections */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -137,6 +134,13 @@
 			remoteGlobalIDString = 82889B2128DF9A7D00804462;
 			remoteInfo = PrimeModal;
 		};
+		82FA0B7D28E8C213009D61F0 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8298FAF728DD007100EBE15F /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 82889B2128DF9A7D00804462;
+			remoteInfo = PrimeModal;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -187,11 +191,7 @@
 		8298FB0928DD007600EBE15F /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		8298FB1028DD02EB00EBE15F /* AppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
 		8298FB1428DD036B00EBE15F /* RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
-		8298FB1728DD03EE00EBE15F /* CounterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CounterView.swift; sourceTree = "<group>"; };
-		8298FB1B28DD044F00EBE15F /* Int.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Int.swift; sourceTree = "<group>"; };
-		8298FB1E28DD09C200EBE15F /* IfPrimeModalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IfPrimeModalView.swift; sourceTree = "<group>"; };
 		8298FB2228DD0FA500EBE15F /* WolframAlphaResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WolframAlphaResult.swift; sourceTree = "<group>"; };
-		8298FB2528DD1B0300EBE15F /* FavoritePrimesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritePrimesView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -199,6 +199,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				82FA0B8428E8C9D5009D61F0 /* OrderedCollections in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -388,9 +389,8 @@
 			isa = PBXGroup;
 			children = (
 				8298FB0228DD007100EBE15F /* Counter_TCAApp.swift */,
+				8298FB1428DD036B00EBE15F /* RootView.swift */,
 				8298FB2028DD0F7000EBE15F /* Domain */,
-				8298FB1928DD042B00EBE15F /* Common */,
-				8298FB1228DD033800EBE15F /* Modules */,
 				8298FB0628DD007600EBE15F /* Assets.xcassets */,
 				8298FB0828DD007600EBE15F /* Preview Content */,
 			);
@@ -403,57 +403,6 @@
 				8298FB0928DD007600EBE15F /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
-			sourceTree = "<group>";
-		};
-		8298FB1228DD033800EBE15F /* Modules */ = {
-			isa = PBXGroup;
-			children = (
-				8298FB2428DD1AEA00EBE15F /* Favorites */,
-				8298FB1D28DD098A00EBE15F /* IfPrimeModal */,
-				8298FB1628DD039500EBE15F /* Counter */,
-				8298FB1328DD034D00EBE15F /* Root */,
-			);
-			path = Modules;
-			sourceTree = "<group>";
-		};
-		8298FB1328DD034D00EBE15F /* Root */ = {
-			isa = PBXGroup;
-			children = (
-				8298FB1428DD036B00EBE15F /* RootView.swift */,
-			);
-			path = Root;
-			sourceTree = "<group>";
-		};
-		8298FB1628DD039500EBE15F /* Counter */ = {
-			isa = PBXGroup;
-			children = (
-				8298FB1728DD03EE00EBE15F /* CounterView.swift */,
-			);
-			path = Counter;
-			sourceTree = "<group>";
-		};
-		8298FB1928DD042B00EBE15F /* Common */ = {
-			isa = PBXGroup;
-			children = (
-				8298FB1A28DD043700EBE15F /* Extensions */,
-			);
-			path = Common;
-			sourceTree = "<group>";
-		};
-		8298FB1A28DD043700EBE15F /* Extensions */ = {
-			isa = PBXGroup;
-			children = (
-				8298FB1B28DD044F00EBE15F /* Int.swift */,
-			);
-			path = Extensions;
-			sourceTree = "<group>";
-		};
-		8298FB1D28DD098A00EBE15F /* IfPrimeModal */ = {
-			isa = PBXGroup;
-			children = (
-				8298FB1E28DD09C200EBE15F /* IfPrimeModalView.swift */,
-			);
-			path = IfPrimeModal;
 			sourceTree = "<group>";
 		};
 		8298FB2028DD0F7000EBE15F /* Domain */ = {
@@ -474,14 +423,6 @@
 				82889A7E28DD90B200804462 /* Activity.swift */,
 			);
 			path = Models;
-			sourceTree = "<group>";
-		};
-		8298FB2428DD1AEA00EBE15F /* Favorites */ = {
-			isa = PBXGroup;
-			children = (
-				8298FB2528DD1B0300EBE15F /* FavoritePrimesView.swift */,
-			);
-			path = Favorites;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -534,8 +475,12 @@
 			buildRules = (
 			);
 			dependencies = (
+				82FA0B7E28E8C213009D61F0 /* PBXTargetDependency */,
 			);
 			name = Counter;
+			packageProductDependencies = (
+				82FA0B8328E8C9D5009D61F0 /* OrderedCollections */,
+			);
 			productName = Counter;
 			productReference = 82889A9628DF952100804462 /* Counter.framework */;
 			productType = "com.apple.product-type.framework";
@@ -922,13 +867,9 @@
 				8298FB2328DD0FA500EBE15F /* WolframAlphaResult.swift in Sources */,
 				8298FB1528DD036B00EBE15F /* RootView.swift in Sources */,
 				8298FB1128DD02EB00EBE15F /* AppState.swift in Sources */,
-				8298FB1C28DD044F00EBE15F /* Int.swift in Sources */,
 				82889A8128DD9EDF00804462 /* AppAction.swift in Sources */,
 				8298FB0328DD007100EBE15F /* Counter_TCAApp.swift in Sources */,
 				82889A7D28DD907400804462 /* User.swift in Sources */,
-				8298FB1828DD03EE00EBE15F /* CounterView.swift in Sources */,
-				8298FB2628DD1B0300EBE15F /* FavoritePrimesView.swift in Sources */,
-				8298FB1F28DD09C200EBE15F /* IfPrimeModalView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -994,6 +935,11 @@
 			isa = PBXTargetDependency;
 			target = 82889B2128DF9A7D00804462 /* PrimeModal */;
 			targetProxy = 82889B3328DF9A7D00804462 /* PBXContainerItemProxy */;
+		};
+		82FA0B7E28E8C213009D61F0 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 82889B2128DF9A7D00804462 /* PrimeModal */;
+			targetProxy = 82FA0B7D28E8C213009D61F0 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -1709,6 +1655,11 @@
 			productName = DequeModule;
 		};
 		8298FB2C28DD1D9700EBE15F /* OrderedCollections */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8298FB2728DD1D9700EBE15F /* XCRemoteSwiftPackageReference "swift-collections" */;
+			productName = OrderedCollections;
+		};
+		82FA0B8328E8C9D5009D61F0 /* OrderedCollections */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 8298FB2728DD1D9700EBE15F /* XCRemoteSwiftPackageReference "swift-collections" */;
 			productName = OrderedCollections;

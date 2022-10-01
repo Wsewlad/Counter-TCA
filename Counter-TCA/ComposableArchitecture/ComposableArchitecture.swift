@@ -23,19 +23,21 @@ public final class Store<State, Action>: ObservableObject {
     }
 }
 
+//MARK: - view
 extension Store {
-    public func view<LocalState>(
-        _ f: @escaping (State) -> LocalState
-    ) -> Store<LocalState, Action> {
-        let localStore = Store<LocalState, Action>(
-            state: f(self.state),
-            reducer: { localState, action  in
-                self.send(action)
-                localState = f(self.state)
+    public func view<LocalState, LocalAction>(
+        state toLocalState: @escaping (State) -> LocalState,
+        action toGlobalAction: @escaping (LocalAction) -> Action
+    ) -> Store<LocalState, LocalAction> {
+        let localStore = Store<LocalState, LocalAction>(
+            state: toLocalState(self.state),
+            reducer: { localState, localAction  in
+                self.send(toGlobalAction(localAction))
+                localState = toLocalState(self.state)
             }
         )
         localStore.cancellable = self.$state.sink { [weak localStore] newState in
-            localStore?.state = f(newState)
+            localStore?.state = toLocalState(newState)
         }
         return localStore
     }
