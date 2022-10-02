@@ -6,14 +6,16 @@
 //
 
 import Foundation
-import Collections
 import SwiftUI
+import OrderedCollections
 import ComposableArchitecture
 
+//MARK: - Actions
 public enum FavoritePrimesAction {
     case deleteFavoritePrimes(IndexSet)
 }
 
+//MARK: - Reducer
 public func favoritePrimesReducer(state: inout OrderedSet<Int>, action: FavoritePrimesAction) {
     switch action {
     case .deleteFavoritePrimes(let indexSet):
@@ -23,6 +25,7 @@ public func favoritePrimesReducer(state: inout OrderedSet<Int>, action: Favorite
     }
 }
 
+//MARK: - View
 public struct FavoritePrimesView: View {
     @ObservedObject var store: Store<OrderedSet<Int>, FavoritePrimesAction>
     

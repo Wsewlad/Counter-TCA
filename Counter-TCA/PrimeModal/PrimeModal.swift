@@ -6,17 +6,20 @@
 //
 
 import Foundation
-import Collections
+import OrderedCollections
 import SwiftUI
 import ComposableArchitecture
 
+//MARK: - State
 public typealias PrimeModalState = (count: Int, favoritePrimes: OrderedSet<Int>)
 
+//MARK: - Actions
 public enum PrimeModalAction {
     case saveFavoritePrimeTapped
     case removeFavoritePrimeTapped
 }
 
+//MARK: - Reducer
 public func primeModalReducer(state: inout PrimeModalState, action: PrimeModalAction) {
     switch action {
     case .saveFavoritePrimeTapped:
@@ -26,6 +29,7 @@ public func primeModalReducer(state: inout PrimeModalState, action: PrimeModalAc
     }
 }
 
+//MARK: - View
 public struct IfPrimeModalView: View {
     @ObservedObject var store: Store<PrimeModalState, PrimeModalAction>
     
@@ -45,7 +49,7 @@ public struct IfPrimeModalView: View {
     }
 }
 
-//MARK: - Actions
+//MARK: - Functions
 private extension IfPrimeModalView {
     func toggleFavorites() {
         if isInFavorites {
@@ -75,6 +79,7 @@ private extension IfPrimeModalView {
     }
 }
 
+//MARK: - Helpers
 extension Int {
     var isPrime: Bool {
         if self <= 1 { return false }

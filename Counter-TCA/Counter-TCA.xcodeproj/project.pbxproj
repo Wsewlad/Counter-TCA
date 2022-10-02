@@ -7,10 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		82889A7D28DD907400804462 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82889A7C28DD907400804462 /* User.swift */; };
-		82889A7F28DD90B200804462 /* Activity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82889A7E28DD90B200804462 /* Activity.swift */; };
 		82889A8128DD9EDF00804462 /* AppAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82889A8028DD9EDF00804462 /* AppAction.swift */; };
-		82889A9028DF7AA700804462 /* Overture in Frameworks */ = {isa = PBXBuildFile; productRef = 82889A8F28DF7AA700804462 /* Overture */; };
 		82889A9E28DF952200804462 /* Counter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 82889A9628DF952100804462 /* Counter.framework */; };
 		82889AA528DF952200804462 /* CounterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82889AA428DF952200804462 /* CounterTests.swift */; };
 		82889AA628DF952200804462 /* Counter.h in Headers */ = {isa = PBXBuildFile; fileRef = 82889A9828DF952100804462 /* Counter.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -28,7 +25,6 @@
 		82889B0B28DF959600804462 /* ComposableArchitecture.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 82889AF728DF959600804462 /* ComposableArchitecture.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		82889B1328DF95DC00804462 /* ComposableArchitecture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82889B1228DF95DC00804462 /* ComposableArchitecture.swift */; };
 		82889B1528DF97E000804462 /* FavoritePrimes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82889B1428DF97E000804462 /* FavoritePrimes.swift */; };
-		82889B1828DF988200804462 /* OrderedCollections in Frameworks */ = {isa = PBXBuildFile; productRef = 82889B1728DF988200804462 /* OrderedCollections */; };
 		82889B1A28DF995D00804462 /* Counter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82889B1928DF995D00804462 /* Counter.swift */; };
 		82889B2A28DF9A7D00804462 /* PrimeModal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 82889B2228DF9A7D00804462 /* PrimeModal.framework */; };
 		82889B3128DF9A7D00804462 /* PrimeModalTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82889B3028DF9A7D00804462 /* PrimeModalTests.swift */; };
@@ -36,17 +32,17 @@
 		82889B3528DF9A7D00804462 /* PrimeModal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 82889B2228DF9A7D00804462 /* PrimeModal.framework */; };
 		82889B3628DF9A7D00804462 /* PrimeModal.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 82889B2228DF9A7D00804462 /* PrimeModal.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		82889B3E28DF9A9100804462 /* PrimeModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82889B3D28DF9A9100804462 /* PrimeModal.swift */; };
-		82889B4028DF9B7000804462 /* OrderedCollections in Frameworks */ = {isa = PBXBuildFile; productRef = 82889B3F28DF9B7000804462 /* OrderedCollections */; };
+		8298A3A228E9953A001DFF01 /* DequeModule in Frameworks */ = {isa = PBXBuildFile; productRef = 8298A3A128E9953A001DFF01 /* DequeModule */; };
+		8298A3A428E9953A001DFF01 /* OrderedCollections in Frameworks */ = {isa = PBXBuildFile; productRef = 8298A3A328E9953A001DFF01 /* OrderedCollections */; };
+		8298A3A628E995C6001DFF01 /* OrderedCollections in Frameworks */ = {isa = PBXBuildFile; productRef = 8298A3A528E995C6001DFF01 /* OrderedCollections */; };
+		8298A3A828E995CF001DFF01 /* OrderedCollections in Frameworks */ = {isa = PBXBuildFile; productRef = 8298A3A728E995CF001DFF01 /* OrderedCollections */; };
+		8298A3AA28E995D4001DFF01 /* OrderedCollections in Frameworks */ = {isa = PBXBuildFile; productRef = 8298A3A928E995D4001DFF01 /* OrderedCollections */; };
+		8298A3AD28E998DD001DFF01 /* Overture in Frameworks */ = {isa = PBXBuildFile; productRef = 8298A3AC28E998DD001DFF01 /* Overture */; };
 		8298FB0328DD007100EBE15F /* Counter_TCAApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8298FB0228DD007100EBE15F /* Counter_TCAApp.swift */; };
 		8298FB0728DD007600EBE15F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8298FB0628DD007600EBE15F /* Assets.xcassets */; };
 		8298FB0A28DD007600EBE15F /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8298FB0928DD007600EBE15F /* Preview Assets.xcassets */; };
 		8298FB1128DD02EB00EBE15F /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8298FB1028DD02EB00EBE15F /* AppState.swift */; };
 		8298FB1528DD036B00EBE15F /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8298FB1428DD036B00EBE15F /* RootView.swift */; };
-		8298FB2328DD0FA500EBE15F /* WolframAlphaResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8298FB2228DD0FA500EBE15F /* WolframAlphaResult.swift */; };
-		8298FB2928DD1D9700EBE15F /* Collections in Frameworks */ = {isa = PBXBuildFile; productRef = 8298FB2828DD1D9700EBE15F /* Collections */; };
-		8298FB2B28DD1D9700EBE15F /* DequeModule in Frameworks */ = {isa = PBXBuildFile; productRef = 8298FB2A28DD1D9700EBE15F /* DequeModule */; };
-		8298FB2D28DD1D9700EBE15F /* OrderedCollections in Frameworks */ = {isa = PBXBuildFile; productRef = 8298FB2C28DD1D9700EBE15F /* OrderedCollections */; };
-		82FA0B8428E8C9D5009D61F0 /* OrderedCollections in Frameworks */ = {isa = PBXBuildFile; productRef = 82FA0B8328E8C9D5009D61F0 /* OrderedCollections */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -162,8 +158,6 @@
 
 /* Begin PBXFileReference section */
 		8285A1E628E238800057425D /* Counter.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = Counter.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
-		82889A7C28DD907400804462 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
-		82889A7E28DD90B200804462 /* Activity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Activity.swift; sourceTree = "<group>"; };
 		82889A8028DD9EDF00804462 /* AppAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppAction.swift; sourceTree = "<group>"; };
 		82889A9628DF952100804462 /* Counter.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Counter.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		82889A9828DF952100804462 /* Counter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Counter.h; sourceTree = "<group>"; };
@@ -191,7 +185,6 @@
 		8298FB0928DD007600EBE15F /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		8298FB1028DD02EB00EBE15F /* AppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
 		8298FB1428DD036B00EBE15F /* RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
-		8298FB2228DD0FA500EBE15F /* WolframAlphaResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WolframAlphaResult.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -199,7 +192,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				82FA0B8428E8C9D5009D61F0 /* OrderedCollections in Frameworks */,
+				8298A3AA28E995D4001DFF01 /* OrderedCollections in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -215,7 +208,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				82889B1828DF988200804462 /* OrderedCollections in Frameworks */,
+				8298A3A828E995CF001DFF01 /* OrderedCollections in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -246,7 +239,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				82889B4028DF9B7000804462 /* OrderedCollections in Frameworks */,
+				8298A3A628E995C6001DFF01 /* OrderedCollections in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -264,12 +257,11 @@
 			files = (
 				82889B0A28DF959600804462 /* ComposableArchitecture.framework in Frameworks */,
 				82889AA928DF952200804462 /* Counter.framework in Frameworks */,
+				8298A3A228E9953A001DFF01 /* DequeModule in Frameworks */,
 				82889B3528DF9A7D00804462 /* PrimeModal.framework in Frameworks */,
-				82889A9028DF7AA700804462 /* Overture in Frameworks */,
-				8298FB2928DD1D9700EBE15F /* Collections in Frameworks */,
-				8298FB2B28DD1D9700EBE15F /* DequeModule in Frameworks */,
+				8298A3AD28E998DD001DFF01 /* Overture in Frameworks */,
+				8298A3A428E9953A001DFF01 /* OrderedCollections in Frameworks */,
 				82889AEA28DF955600804462 /* FavoritePrimes.framework in Frameworks */,
-				8298FB2D28DD1D9700EBE15F /* OrderedCollections in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -410,19 +402,8 @@
 			children = (
 				82889A8028DD9EDF00804462 /* AppAction.swift */,
 				8298FB1028DD02EB00EBE15F /* AppState.swift */,
-				8298FB2128DD0F7E00EBE15F /* Models */,
 			);
 			path = Domain;
-			sourceTree = "<group>";
-		};
-		8298FB2128DD0F7E00EBE15F /* Models */ = {
-			isa = PBXGroup;
-			children = (
-				8298FB2228DD0FA500EBE15F /* WolframAlphaResult.swift */,
-				82889A7C28DD907400804462 /* User.swift */,
-				82889A7E28DD90B200804462 /* Activity.swift */,
-			);
-			path = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -479,7 +460,7 @@
 			);
 			name = Counter;
 			packageProductDependencies = (
-				82FA0B8328E8C9D5009D61F0 /* OrderedCollections */,
+				8298A3A928E995D4001DFF01 /* OrderedCollections */,
 			);
 			productName = Counter;
 			productReference = 82889A9628DF952100804462 /* Counter.framework */;
@@ -519,7 +500,7 @@
 			);
 			name = FavoritePrimes;
 			packageProductDependencies = (
-				82889B1728DF988200804462 /* OrderedCollections */,
+				8298A3A728E995CF001DFF01 /* OrderedCollections */,
 			);
 			productName = FavoritePrimes;
 			productReference = 82889AD728DF955600804462 /* FavoritePrimes.framework */;
@@ -596,7 +577,7 @@
 			);
 			name = PrimeModal;
 			packageProductDependencies = (
-				82889B3F28DF9B7000804462 /* OrderedCollections */,
+				8298A3A528E995C6001DFF01 /* OrderedCollections */,
 			);
 			productName = PrimeModal;
 			productReference = 82889B2228DF9A7D00804462 /* PrimeModal.framework */;
@@ -640,10 +621,9 @@
 			);
 			name = "Counter-TCA";
 			packageProductDependencies = (
-				8298FB2828DD1D9700EBE15F /* Collections */,
-				8298FB2A28DD1D9700EBE15F /* DequeModule */,
-				8298FB2C28DD1D9700EBE15F /* OrderedCollections */,
-				82889A8F28DF7AA700804462 /* Overture */,
+				8298A3A128E9953A001DFF01 /* DequeModule */,
+				8298A3A328E9953A001DFF01 /* OrderedCollections */,
+				8298A3AC28E998DD001DFF01 /* Overture */,
 			);
 			productName = "Counter-TCA";
 			productReference = 8298FAFF28DD007100EBE15F /* Counter-TCA.app */;
@@ -706,8 +686,8 @@
 			);
 			mainGroup = 8298FAF628DD007100EBE15F;
 			packageReferences = (
-				8298FB2728DD1D9700EBE15F /* XCRemoteSwiftPackageReference "swift-collections" */,
-				82889A8E28DF7AA500804462 /* XCRemoteSwiftPackageReference "swift-overture" */,
+				8298A39E28E9953A001DFF01 /* XCRemoteSwiftPackageReference "swift-collections" */,
+				8298A3AB28E998DD001DFF01 /* XCRemoteSwiftPackageReference "swift-overture" */,
 			);
 			productRefGroup = 8298FB0028DD007100EBE15F /* Products */;
 			projectDirPath = "";
@@ -863,13 +843,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				82889A7F28DD90B200804462 /* Activity.swift in Sources */,
-				8298FB2328DD0FA500EBE15F /* WolframAlphaResult.swift in Sources */,
 				8298FB1528DD036B00EBE15F /* RootView.swift in Sources */,
 				8298FB1128DD02EB00EBE15F /* AppState.swift in Sources */,
 				82889A8128DD9EDF00804462 /* AppAction.swift in Sources */,
 				8298FB0328DD007100EBE15F /* Counter_TCAApp.swift in Sources */,
-				82889A7D28DD907400804462 /* User.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1610,15 +1587,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		82889A8E28DF7AA500804462 /* XCRemoteSwiftPackageReference "swift-overture" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/pointfreeco/swift-overture";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 0.5.0;
-			};
-		};
-		8298FB2728DD1D9700EBE15F /* XCRemoteSwiftPackageReference "swift-collections" */ = {
+		8298A39E28E9953A001DFF01 /* XCRemoteSwiftPackageReference "swift-collections" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/apple/swift-collections.git";
 			requirement = {
@@ -1626,43 +1595,46 @@
 				minimumVersion = 1.0.0;
 			};
 		};
+		8298A3AB28E998DD001DFF01 /* XCRemoteSwiftPackageReference "swift-overture" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/pointfreeco/swift-overture";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.5.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		82889A8F28DF7AA700804462 /* Overture */ = {
+		8298A3A128E9953A001DFF01 /* DequeModule */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 82889A8E28DF7AA500804462 /* XCRemoteSwiftPackageReference "swift-overture" */;
-			productName = Overture;
-		};
-		82889B1728DF988200804462 /* OrderedCollections */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 8298FB2728DD1D9700EBE15F /* XCRemoteSwiftPackageReference "swift-collections" */;
-			productName = OrderedCollections;
-		};
-		82889B3F28DF9B7000804462 /* OrderedCollections */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 8298FB2728DD1D9700EBE15F /* XCRemoteSwiftPackageReference "swift-collections" */;
-			productName = OrderedCollections;
-		};
-		8298FB2828DD1D9700EBE15F /* Collections */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 8298FB2728DD1D9700EBE15F /* XCRemoteSwiftPackageReference "swift-collections" */;
-			productName = Collections;
-		};
-		8298FB2A28DD1D9700EBE15F /* DequeModule */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 8298FB2728DD1D9700EBE15F /* XCRemoteSwiftPackageReference "swift-collections" */;
+			package = 8298A39E28E9953A001DFF01 /* XCRemoteSwiftPackageReference "swift-collections" */;
 			productName = DequeModule;
 		};
-		8298FB2C28DD1D9700EBE15F /* OrderedCollections */ = {
+		8298A3A328E9953A001DFF01 /* OrderedCollections */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 8298FB2728DD1D9700EBE15F /* XCRemoteSwiftPackageReference "swift-collections" */;
+			package = 8298A39E28E9953A001DFF01 /* XCRemoteSwiftPackageReference "swift-collections" */;
 			productName = OrderedCollections;
 		};
-		82FA0B8328E8C9D5009D61F0 /* OrderedCollections */ = {
+		8298A3A528E995C6001DFF01 /* OrderedCollections */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 8298FB2728DD1D9700EBE15F /* XCRemoteSwiftPackageReference "swift-collections" */;
+			package = 8298A39E28E9953A001DFF01 /* XCRemoteSwiftPackageReference "swift-collections" */;
 			productName = OrderedCollections;
+		};
+		8298A3A728E995CF001DFF01 /* OrderedCollections */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8298A39E28E9953A001DFF01 /* XCRemoteSwiftPackageReference "swift-collections" */;
+			productName = OrderedCollections;
+		};
+		8298A3A928E995D4001DFF01 /* OrderedCollections */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8298A39E28E9953A001DFF01 /* XCRemoteSwiftPackageReference "swift-collections" */;
+			productName = OrderedCollections;
+		};
+		8298A3AC28E998DD001DFF01 /* Overture */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8298A3AB28E998DD001DFF01 /* XCRemoteSwiftPackageReference "swift-overture" */;
+			productName = Overture;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

@@ -8,16 +8,58 @@
 import Foundation
 import SwiftUI
 import ComposableArchitecture
-import Collections
+import OrderedCollections
 import PrimeModal
 
 let wolframAlphaApiKey = "T8R7LH-X7L2V6G98P"
 
+//MARK: - Proxy Reducer
+public let counterViewReducer = combine(
+    pullback(counterReducer, state: \CounterViewState.count, action: \CounterViewAction.counter),
+    pullback(primeModalReducer, state: \.self, action: \.primeModal)
+)
+
+//MARK: - Proxy Actions
+public enum CounterViewAction {
+    case counter(CounterAction)
+    case primeModal(PrimeModalAction)
+}
+
+//MARK: - Proxy Actions KeyPath
+public extension CounterViewAction {
+    var counter: CounterAction? {
+        get {
+            guard case let .counter(value) = self else { return nil }
+            return value
+        }
+        set {
+            guard case .counter = self, let newValue = newValue else { return }
+            self = .counter(newValue)
+        }
+    }
+    
+    var primeModal: PrimeModalAction? {
+        get {
+            guard case let .primeModal(value) = self else { return nil }
+            return value
+        }
+        set {
+            guard case .primeModal = self, let newValue = newValue else { return }
+            self = .primeModal(newValue)
+        }
+    }
+}
+
+//MARK: - State
+public typealias CounterViewState = (count: Int, favoritePrimes: OrderedSet<Int>)
+
+//MARK: - Actions
 public enum CounterAction {
     case decrTapped
     case incrTapped
 }
 
+//MARK: - Reducer
 public func counterReducer(state: inout Int, action: CounterAction) {
     switch action {
     case .decrTapped:
@@ -27,13 +69,7 @@ public func counterReducer(state: inout Int, action: CounterAction) {
     }
 }
 
-public typealias CounterViewState = (count: Int, favoritePrimes: OrderedSet<Int>)
-
-public enum CounterViewAction {
-    case counter(CounterAction)
-    case primeModal(PrimeModalAction)
-}
-
+//MARK: - View
 public struct CounterView: View {
     @ObservedObject var store: Store<CounterViewState, CounterViewAction>
     
@@ -106,7 +142,7 @@ private extension CounterView {
     }
 }
 
-//MARK: - Actions
+//MARK: - Functions
 private extension CounterView {
     func nthPrimeButtonAction() {
         self.isNthPrimeButtonDisabled = true
@@ -156,6 +192,7 @@ extension CounterView {
     }
 }
 
+//MARK: - Models
 struct WolframAlphaResult: Decodable {
     let queryresult: QueryResult
     
@@ -173,7 +210,7 @@ struct WolframAlphaResult: Decodable {
     }
 }
 
-//MARK: - ordinal
+//MARK: - Helpers
 extension Int {
     var ordinal: String {
         let formatter = NumberFormatter()

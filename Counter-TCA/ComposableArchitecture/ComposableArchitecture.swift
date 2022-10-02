@@ -54,8 +54,8 @@ public func combine<State, Action>(
     }
 }
 
-//MARK: - transform
-public func transform<GlobalState, LocalState, GlobalAction, LocalAction>(
+//MARK: - pullback
+public func pullback<GlobalState, LocalState, GlobalAction, LocalAction>(
     _ localReducer: @escaping (inout LocalState, LocalAction) -> Void,
     state: WritableKeyPath<GlobalState, LocalState>,
     action: WritableKeyPath<GlobalAction, LocalAction?>

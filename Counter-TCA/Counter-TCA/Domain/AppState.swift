@@ -7,8 +7,8 @@
 
 import Foundation
 import SwiftUI
-import Collections
-import PrimeModal
+import OrderedCollections
+import Counter
 
 struct AppState {
     var count: Int = 0
@@ -17,15 +17,38 @@ struct AppState {
     var activityFeed: [Activity] = []
 }
 
+//MARK: - KeyPath
 extension AppState {
-    var primeModal: PrimeModalState {
+    var counterView: CounterViewState {
         get {
-            (self.count, favoritePrimes: self.favoritePrimes)
+            CounterViewState(
+                count: self.count,
+                favoritePrimes: self.favoritePrimes
+            )
         }
         set {
             self.count = newValue.count
             self.favoritePrimes = newValue.favoritePrimes
         }
+    }
+}
+
+//MARK: - Models
+extension AppState {
+    struct Activity {
+        let timestamp: Date
+        let type: ActivityType
+        
+        enum ActivityType {
+            case saveFavoritePrimeTapped(Int)
+            case removedFavoritePrime(Int)
+        }
+    }
+    
+    struct User {
+        let id: Int
+        let name: String
+        let bio: String
     }
 }
 
@@ -35,15 +58,15 @@ func activityFeed(
 ) -> (inout AppState, AppAction) -> Void {
     return { state, action in
         switch action {
-        case .counter:
+        case .counterView(.counter):
             break
 
-        case .primeModal(.removeFavoritePrimeTapped):
+        case .counterView(.primeModal(.removeFavoritePrimeTapped)):
             state.activityFeed.append(
                 .init(timestamp: Date(), type: .removedFavoritePrime(state.count))
             )
 
-        case .primeModal(.saveFavoritePrimeTapped):
+        case .counterView(.primeModal(.saveFavoritePrimeTapped)):
             state.activityFeed.append(
                 .init(timestamp: Date(), type: .saveFavoritePrimeTapped(state.count))
             )
