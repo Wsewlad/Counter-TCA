@@ -60,12 +60,14 @@ public enum CounterAction {
 }
 
 //MARK: - Reducer
-public func counterReducer(state: inout Int, action: CounterAction) {
+public func counterReducer(state: inout Int, action: CounterAction) -> Effect {
     switch action {
     case .decrTapped:
         state -= 1
+        return {}
     case .incrTapped:
         state += 1
+        return {}
     }
 }
 

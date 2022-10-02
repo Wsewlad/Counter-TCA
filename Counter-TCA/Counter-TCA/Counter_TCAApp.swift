@@ -11,7 +11,7 @@ import ComposableArchitecture
 import FavoritePrimes
 import Counter
 
-let _appReducer: (inout AppState, AppAction) -> Void = combine(
+let _appReducer: Reducer<AppState, AppAction> = combine(
     pullback(counterViewReducer, state: \.counterView, action: \.counterView),
     pullback(favoritePrimesReducer, state: \.favoritePrimes, action: \.favoritePrimes)
 )

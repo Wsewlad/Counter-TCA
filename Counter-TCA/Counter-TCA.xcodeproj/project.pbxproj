@@ -130,6 +130,13 @@
 			remoteGlobalIDString = 82889B2128DF9A7D00804462;
 			remoteInfo = PrimeModal;
 		};
+		829F6E5328EA31C200C00B80 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8298FAF728DD007100EBE15F /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 82889AF628DF959600804462;
+			remoteInfo = ComposableArchitecture;
+		};
 		82FA0B7D28E8C213009D61F0 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 8298FAF728DD007100EBE15F /* Project object */;
@@ -179,6 +186,7 @@
 		82889B2928DF9A7D00804462 /* PrimeModalTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PrimeModalTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		82889B3028DF9A7D00804462 /* PrimeModalTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrimeModalTests.swift; sourceTree = "<group>"; };
 		82889B3D28DF9A9100804462 /* PrimeModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrimeModal.swift; sourceTree = "<group>"; };
+		8298A3AE28E9F2DC001DFF01 /* Favorite Primes.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = "Favorite Primes.playground"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		8298FAFF28DD007100EBE15F /* Counter-TCA.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Counter-TCA.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8298FB0228DD007100EBE15F /* Counter_TCAApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Counter_TCAApp.swift; sourceTree = "<group>"; };
 		8298FB0628DD007600EBE15F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -346,6 +354,7 @@
 		8298FAF628DD007100EBE15F = {
 			isa = PBXGroup;
 			children = (
+				8298A3AE28E9F2DC001DFF01 /* Favorite Primes.playground */,
 				8285A1E628E238800057425D /* Counter.playground */,
 				8298FB0128DD007100EBE15F /* Counter-TCA */,
 				82889A9728DF952100804462 /* Counter */,
@@ -497,6 +506,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				829F6E5428EA31C200C00B80 /* PBXTargetDependency */,
 			);
 			name = FavoritePrimes;
 			packageProductDependencies = (
@@ -912,6 +922,11 @@
 			isa = PBXTargetDependency;
 			target = 82889B2128DF9A7D00804462 /* PrimeModal */;
 			targetProxy = 82889B3328DF9A7D00804462 /* PBXContainerItemProxy */;
+		};
+		829F6E5428EA31C200C00B80 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 82889AF628DF959600804462 /* ComposableArchitecture */;
+			targetProxy = 829F6E5328EA31C200C00B80 /* PBXContainerItemProxy */;
 		};
 		82FA0B7E28E8C213009D61F0 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;

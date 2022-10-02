@@ -8,18 +8,27 @@
 import SwiftUI
 import Combine
 
+public typealias Effect<Action> = () -> Action?
+
+public typealias Reducer<State, Action> = (inout State, Action) -> [Effect<Action>]
+
 public final class Store<State, Action>: ObservableObject {
-    private let reducer: (inout State, Action) -> Void
+    private let reducer: Reducer<State, Action>
     @Published public private(set) var state: State
     private var cancellable: Cancellable?
     
-    public init(state: State, reducer: @escaping (inout State, Action) -> Void) {
+    public init(state: State, reducer: @escaping Reducer<State, Action>) {
         self.state = state
         self.reducer = reducer
     }
     
     public func send(_ action: Action) {
-        self.reducer(&self.state, action)
+        let effects = self.reducer(&self.state, action)
+        effects.forEach { effect in
+            if let action = effect() {
+                self.send(action)
+            }
+        }
     }
 }
 
@@ -34,6 +43,7 @@ extension Store {
             reducer: { localState, localAction  in
                 self.send(toGlobalAction(localAction))
                 localState = toLocalState(self.state)
+                return []
             }
         )
         localStore.cancellable = self.$state.sink { [weak localStore] newState in
@@ -45,49 +55,61 @@ extension Store {
 
 //MARK: - combine
 public func combine<State, Action>(
-  _ reducers: (inout State, Action) -> Void...
-) -> (inout State, Action) -> Void {
+  _ reducers: Reducer<State, Action>...
+) -> Reducer<State, Action> {
     return { state, action in
-        reducers.forEach { reducer in
-            reducer(&state, action)
-        }
+        let effects = reducers.flatMap { $0(&state, action) }
+        return effects
     }
 }
 
 //MARK: - pullback
 public func pullback<GlobalState, LocalState, GlobalAction, LocalAction>(
-    _ localReducer: @escaping (inout LocalState, LocalAction) -> Void,
+    _ localReducer: @escaping Reducer<LocalState, LocalAction>,
     state: WritableKeyPath<GlobalState, LocalState>,
     action: WritableKeyPath<GlobalAction, LocalAction?>
-) -> (inout GlobalState, GlobalAction) -> Void {
+) -> Reducer<GlobalState, GlobalAction> {
     return { globalState, globalAction in
-        guard let localAction = globalAction[keyPath: action] else { return }
-        localReducer(&globalState[keyPath: state], localAction)
+        guard let localAction = globalAction[keyPath: action] else { return [] }
+        let localEffects = localReducer(&globalState[keyPath: state], localAction)
+        return localEffects.map { localEffect in
+            { () -> GlobalAction? in
+                guard let localAction = localEffect() else { return nil }
+                var globalAction = globalAction
+                globalAction[keyPath: action] = localAction
+                return globalAction
+            }
+        }
     }
 }
 
 //MARK: - logging
 public func logging<State, Action>(
-  _ reducer: @escaping (inout State, Action) -> Void
-) -> (inout State, Action) -> Void {
+  _ reducer: @escaping Reducer<State, Action>
+) -> Reducer<State, Action> {
     return { state, action in
-        reducer(&state, action)
-        print("Action: \(action)")
-        print("State:")
-        dump(state)
-        print("---")
+        let effects = reducer(&state, action)
+        let newState = state
+        return [{
+            print("Action: \(action)")
+            print("State:")
+            dump(newState)
+            print("---")
+            return nil
+        }] + effects
     }
 }
 
 //MARK: - filter Actions
 public func filterActions<State, Action>(_ predicate: @escaping (Action) -> Bool)
-  -> (@escaping (inout State, Action) -> Void)
-  -> (inout State, Action) -> Void {
+  -> (@escaping Reducer<State, Action>)
+  -> Reducer<State, Action> {
       return { reducer in
           return { state, action in
               if predicate(action) {
-                  reducer(&state, action)
+                  return reducer(&state, action)
               }
+              return []
           }
       }
 }
@@ -107,15 +129,16 @@ enum UndoAction<Action> {
     case redo
 }
 
-func undo<Value, Action>(
-    _ reducer: @escaping (inout Value, Action) -> Void,
+func undo<State, Action>(
+    _ reducer: @escaping Reducer<State, Action>,
     limit: Int
-) -> (inout UndoState<Value>, UndoAction<Action>) -> Void {
+) -> (inout UndoState<State>, UndoAction<Action>) -> Void {
     return { undoState, undoAction in
         switch undoAction {
         case let .action(action):
             var currentState = undoState.state
-            reducer(&currentState, action)
+            let effects = reducer(&currentState, action)
+            
             undoState.history.append(currentState)
             undoState.undone = []
             

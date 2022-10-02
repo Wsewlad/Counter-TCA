@@ -3,12 +3,11 @@ import SwiftUI
 import PlaygroundSupport
 import OrderedCollections
 import ComposableArchitecture
-import FavoritePrimes
 import PrimeModal
 import Counter
 
-PlaygroundPage.current.liveView = UIHostingController(
-    rootView: CounterView(
+PlaygroundPage.current.setLiveView(
+    CounterView(
         store: Store<CounterViewState, CounterViewAction>(
             state: (0, []),
             reducer: counterViewReducer
@@ -21,15 +20,6 @@ PlaygroundPage.current.liveView = UIHostingController(
 //        store: Store<PrimeModalState, PrimeModalAction>(
 //            state: (3, []),
 //            reducer: primeModalReducer
-//        )
-//    )
-//)
-
-//PlaygroundPage.current.liveView = UIHostingController(
-//    rootView: FavoritePrimesView(
-//        store: Store<OrderedSet<Int>, FavoritePrimesAction>(
-//            state: [1, 2, 3],
-//            reducer: favoritePrimesReducer
 //        )
 //    )
 //)

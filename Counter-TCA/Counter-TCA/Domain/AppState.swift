@@ -58,7 +58,7 @@ func activityFeed(
 ) -> (inout AppState, AppAction) -> Void {
     return { state, action in
         switch action {
-        case .counterView(.counter):
+        case .counterView(.counter), .favoritePrimes(.loadedFavoritePrimes):
             break
 
         case .counterView(.primeModal(.removeFavoritePrimeTapped)):
@@ -80,6 +80,9 @@ func activityFeed(
                     )
                 )
             }
+            
+        default:
+            break
         }
         
         reducer(&state, action)
