@@ -22,13 +22,14 @@ let appReducer = pullback(_appReducer, state: \.self, action: \.self)
 struct Counter_TCAApp: App {
     @StateObject var store = Store(
         state: AppState(),
-        reducer: with(
-            appReducer,
-            compose(
-                logging,
-                activityFeed
-            )
-        )
+        reducer: appReducer
+//        with(
+//            appReducer,
+//            compose(
+//                logging,
+//                activityFeed
+//            )
+//        )
     )
     
     var body: some Scene {

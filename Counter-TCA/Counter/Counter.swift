@@ -15,8 +15,8 @@ let wolframAlphaApiKey = "T8R7LH-X7L2V6G98P"
 
 //MARK: - Proxy Reducer
 public let counterViewReducer = combine(
-    pullback(counterReducer, state: \CounterViewState.count, action: \CounterViewAction.counter),
-    pullback(primeModalReducer, state: \.self, action: \.primeModal)
+    pullback(counterReducer, state: \CounterViewState.counter, action: \CounterViewAction.counter),
+    pullback(primeModalReducer, state: \.primeModal, action: \.primeModal)
 )
 
 //MARK: - Proxy Actions
@@ -51,23 +51,88 @@ public extension CounterViewAction {
 }
 
 //MARK: - State
-public typealias CounterViewState = (count: Int, favoritePrimes: OrderedSet<Int>)
+public struct CounterViewState {
+    public var count: Int
+    public var favoritePrimes: OrderedSet<Int>
+    public var alertNthPrime: Int?
+    public var isNthPrimeButtonDisabled: Bool
+    public var alertNthPrimePresented: Bool
+    
+    public init(
+        count: Int,
+        favoritePrimes: OrderedSet<Int>,
+        alertNthPrime: Int? = nil,
+        isNthPrimeButtonDisabled: Bool = false,
+        alertNthPrimePresented: Bool = false
+    ) {
+        self.count = count
+        self.favoritePrimes = favoritePrimes
+        self.alertNthPrime = alertNthPrime
+        self.isNthPrimeButtonDisabled = isNthPrimeButtonDisabled
+        self.alertNthPrimePresented = alertNthPrimePresented
+    }
+    
+    var counter: CounterState {
+        get { (self.alertNthPrime, self.count, self.isNthPrimeButtonDisabled, self.alertNthPrimePresented) }
+        set { (self.alertNthPrime, self.count, self.isNthPrimeButtonDisabled, self.alertNthPrimePresented) = newValue }
+    }
+    
+    var primeModal: PrimeModalState {
+        get { (self.count, self.favoritePrimes) }
+        set { (self.count, self.favoritePrimes) = newValue }
+    }
+}
 
 //MARK: - Actions
 public enum CounterAction {
     case decrTapped
     case incrTapped
+    case nthPrimeButtonTapped
+    case nthPrimeResponse(Int?)
+    case updateValue(WritableKeyPath<CounterState, Int?>, value: Int?)
 }
 
+public typealias CounterState = (
+    alertNthPrime: Int?,
+    count: Int,
+    isNthPrimeButtonDisabled: Bool,
+    alertNthPrimePresented: Bool
+)
+
 //MARK: - Reducer
-public func counterReducer(state: inout Int, action: CounterAction) -> Effect {
+public func counterReducer(state: inout CounterState, action: CounterAction) -> [Effect<CounterAction>] {
     switch action {
     case .decrTapped:
-        state -= 1
-        return {}
+        state.count -= 1
+        return []
+        
     case .incrTapped:
-        state += 1
-        return {}
+        state.count += 1
+        return []
+        
+    case .nthPrimeButtonTapped:
+        state.isNthPrimeButtonDisabled = true
+        let count = state.count
+        return [{
+            let sema = DispatchSemaphore(value: 0)
+            var p: Int?
+            CounterView.nthPrime(n: count) { prime in
+                p = prime
+                sema.signal()
+            }
+            sema.wait()
+            return .nthPrimeResponse(p)
+        }]
+        
+    case let .nthPrimeResponse(prime):
+        state.alertNthPrime = prime
+        state.alertNthPrimePresented = prime != nil
+        state.isNthPrimeButtonDisabled = false
+        return []
+        
+    case let .updateValue(keyPath, value):
+        state[keyPath: keyPath] = value
+        return []
     }
 }
 
@@ -76,9 +141,6 @@ public struct CounterView: View {
     @ObservedObject var store: Store<CounterViewState, CounterViewAction>
     
     @State private var isPrimeModalShown: Bool = false
-    @State private var alertNthPrimePresented: Bool = false
-    @State private var alertNthPrime: Int?  = nil
-    @State private var isNthPrimeButtonDisabled: Bool = false
     
     public init(store: Store<CounterViewState, CounterViewAction>) {
         self.store = store
@@ -89,14 +151,14 @@ public struct CounterView: View {
             stepperView
                 .alert(
                     "",
-                    isPresented: $alertNthPrimePresented,
-                    presenting: alertNthPrime,
+                    isPresented: .constant(self.store.state.alertNthPrimePresented),
+                    presenting: self.store.state.alertNthPrime,
                     actions: { _ in Button("OK", action: {}) },
                     message: { n in Text("The \(self.store.state.count.ordinal) prime is \(n)") }
                 )
-                .onChange(of: alertNthPrimePresented) { newValue in
+                .onChange(of: self.store.state.alertNthPrimePresented) { newValue in
                     if !newValue {
-                        alertNthPrime = nil
+                        self.store.send(.counter(.updateValue(\.alertNthPrime, value: nil)))
                     }
                 }
             
@@ -136,29 +198,17 @@ private extension CounterView {
                 Text("Is this prime?")
             }
             
-            Button(action: self.nthPrimeButtonAction) {
+            Button(action: { self.store.send(.counter(.nthPrimeButtonTapped)) }) {
                 Text("What is the \(self.store.state.count.ordinal) prime?")
             }
-            .disabled(self.isNthPrimeButtonDisabled)
-        }
-    }
-}
-
-//MARK: - Functions
-private extension CounterView {
-    func nthPrimeButtonAction() {
-        self.isNthPrimeButtonDisabled = true
-        self.nthPrime {
-            self.alertNthPrime = $0
-            self.alertNthPrimePresented = $0 != nil
-            self.isNthPrimeButtonDisabled = false
+            .disabled(self.store.state.isNthPrimeButtonDisabled)
         }
     }
 }
 
 //MARK: - Wolfram Alpha
 extension CounterView {
-    func wolframAlpha(query: String, callback: @escaping (WolframAlphaResult?) -> Void) -> Void {
+    static func wolframAlpha(query: String, callback: @escaping (WolframAlphaResult?) -> Void) -> Void {
         var components = URLComponents(string: "https://api.wolframalpha.com/v2/query")!
         components.queryItems = [
             URLQueryItem(name: "input", value: query),
@@ -176,8 +226,8 @@ extension CounterView {
         .resume()
     }
     
-    func nthPrime(callback: @escaping (Int?) -> Void) -> Void {
-        wolframAlpha(query: "prime \(self.store.state.count)") { result in
+    static func nthPrime(n: Int, callback: @escaping (Int?) -> Void) -> Void {
+        wolframAlpha(query: "prime \(n)") { result in
             callback(
                 result
                     .flatMap {

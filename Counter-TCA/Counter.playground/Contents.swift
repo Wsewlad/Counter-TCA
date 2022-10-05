@@ -9,7 +9,7 @@ import Counter
 PlaygroundPage.current.setLiveView(
     CounterView(
         store: Store<CounterViewState, CounterViewAction>(
-            state: (0, []),
+            state: .init(count: 0, favoritePrimes: [], alertNthPrime: nil, isNthPrimeButtonDisabled: false, alertNthPrimePresented: false ),
             reducer: counterViewReducer
         )
     )
