@@ -89,7 +89,8 @@ public enum CounterAction {
     case incrTapped
     case nthPrimeButtonTapped
     case nthPrimeResponse(Int?)
-    case updateValue(WritableKeyPath<CounterState, Int?>, value: Int?)
+    case updateOptinalIntValue(WritableKeyPath<CounterState, Int?>, value: Int?)
+    case updateBoolValue(WritableKeyPath<CounterState, Bool>, value: Bool)
 }
 
 public typealias CounterState = (
@@ -113,15 +114,12 @@ public func counterReducer(state: inout CounterState, action: CounterAction) -> 
     case .nthPrimeButtonTapped:
         state.isNthPrimeButtonDisabled = true
         let count = state.count
-        return [{
-            let sema = DispatchSemaphore(value: 0)
-            var p: Int?
+        return [{ callback in
             CounterView.nthPrime(n: count) { prime in
-                p = prime
-                sema.signal()
+                DispatchQueue.main.async {
+                    callback(.nthPrimeResponse(prime))
+                }
             }
-            sema.wait()
-            return .nthPrimeResponse(p)
         }]
         
     case let .nthPrimeResponse(prime):
@@ -130,7 +128,11 @@ public func counterReducer(state: inout CounterState, action: CounterAction) -> 
         state.isNthPrimeButtonDisabled = false
         return []
         
-    case let .updateValue(keyPath, value):
+    case let .updateOptinalIntValue(keyPath, value):
+        state[keyPath: keyPath] = value
+        return []
+        
+    case let .updateBoolValue(keyPath, value):
         state[keyPath: keyPath] = value
         return []
     }
@@ -151,14 +153,17 @@ public struct CounterView: View {
             stepperView
                 .alert(
                     "",
-                    isPresented: .constant(self.store.state.alertNthPrimePresented),
+                    isPresented: .init(
+                        get: { self.store.state.alertNthPrimePresented },
+                        set: { self.store.send(.counter(.updateBoolValue(\.alertNthPrimePresented, value: $0))) }
+                    ),
                     presenting: self.store.state.alertNthPrime,
-                    actions: { _ in Button("OK", action: {}) },
+                    actions: { _ in Button("OK") {  } },
                     message: { n in Text("The \(self.store.state.count.ordinal) prime is \(n)") }
                 )
                 .onChange(of: self.store.state.alertNthPrimePresented) { newValue in
                     if !newValue {
-                        self.store.send(.counter(.updateValue(\.alertNthPrime, value: nil)))
+                        self.store.send(.counter(.updateOptinalIntValue(\.alertNthPrime, value: nil)))
                     }
                 }
             
