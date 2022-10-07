@@ -8,6 +8,7 @@
 import SwiftUI
 import Combine
 
+//MARK: - Effect
 public struct Effect<A> {
     public let run: (@escaping (A) -> Void) -> Void
     
@@ -20,8 +21,40 @@ public struct Effect<A> {
     }
 }
 
+public extension Effect where A == (Data?, URLResponse?, Error?) {
+    func decode<M: Decodable>(as type: M.Type) -> Effect<M?> {
+        self.map { data, _, _ in
+            return data
+                .flatMap { try? JSONDecoder().decode(M.self, from: $0) }
+        }
+    }
+}
+
+public extension Effect {
+    func receive(on queue: DispatchQueue) -> Effect {
+        return Effect { callback in
+            self.run { a in
+                queue.async {
+                    callback(a)
+                }
+            }
+        }
+    }
+}
+
+public func dataTask(with url: URL) -> Effect<(Data?, URLResponse?, Error?)> {
+    return Effect { callback in
+        URLSession.shared.dataTask(with: url) { data, response, error in
+            callback((data, response, error))
+        }
+        .resume()
+    }
+}
+
+//MARK: - Reducer
 public typealias Reducer<State, Action> = (inout State, Action) -> [Effect<Action>]
 
+//MARK: - Store
 public final class Store<State, Action>: ObservableObject {
     private let reducer: Reducer<State, Action>
     @Published public private(set) var state: State

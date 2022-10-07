@@ -208,27 +208,6 @@ private extension CounterView {
     }
 }
 
-extension Effect where A == (Data?, URLResponse?, Error?) {
-    func decode<M: Decodable>(as type: M.Type) -> Effect<M?> {
-        self.map { data, _, _ in
-            return data
-                .flatMap { try? JSONDecoder().decode(M.self, from: $0) }
-        }
-    }
-}
-
-extension Effect {
-    func receive(on queue: DispatchQueue) -> Effect {
-        return Effect { callback in
-            self.run { a in
-                queue.async {
-                    callback(a)
-                }
-            }
-        }
-    }
-}
-
 //MARK: - Wolfram Alpha
 extension CounterView {
     static func wolframAlpha(query: String) -> Effect<WolframAlphaResult?> {
@@ -257,15 +236,6 @@ extension CounterView {
                 }
                 .flatMap(Int.init)
         }
-    }
-}
-
-func dataTask(with url: URL) -> Effect<(Data?, URLResponse?, Error?)> {
-    return Effect { callback in
-        URLSession.shared.dataTask(with: url) { data, response, error in
-            callback((data, response, error))
-        }
-        .resume()
     }
 }
 
