@@ -9,12 +9,17 @@ import Foundation
 import SwiftUI
 import OrderedCollections
 import Counter
+import ComposableArchitecture
 
 struct AppState {
     var count: Int = 0
     var favoritePrimes: OrderedSet<Int> = []
     var loggedInUser: User? = nil
     var activityFeed: [Activity] = []
+    
+    var alertNthPrime: Int? = nil
+    var isNthPrimeButtonDisabled: Bool = false
+    var alertNthPrimePresented: Bool = false
 }
 
 //MARK: - KeyPath
@@ -23,12 +28,18 @@ extension AppState {
         get {
             CounterViewState(
                 count: self.count,
-                favoritePrimes: self.favoritePrimes
+                favoritePrimes: self.favoritePrimes,
+                alertNthPrime: self.alertNthPrime,
+                isNthPrimeButtonDisabled: self.isNthPrimeButtonDisabled,
+                alertNthPrimePresented: self.alertNthPrimePresented
             )
         }
         set {
             self.count = newValue.count
             self.favoritePrimes = newValue.favoritePrimes
+            self.alertNthPrime = newValue.alertNthPrime
+            self.isNthPrimeButtonDisabled = newValue.isNthPrimeButtonDisabled
+            self.alertNthPrimePresented = newValue.alertNthPrimePresented
         }
     }
 }
@@ -54,13 +65,10 @@ extension AppState {
 
 //MARK: - activity Feed
 func activityFeed(
-    _ reducer: @escaping (inout AppState, AppAction) -> Void
-) -> (inout AppState, AppAction) -> Void {
+    _ reducer: @escaping Reducer<AppState, AppAction>
+) -> Reducer<AppState, AppAction> {
     return { state, action in
         switch action {
-        case .counterView(.counter), .favoritePrimes(.loadedFavoritePrimes):
-            break
-
         case .counterView(.primeModal(.removeFavoritePrimeTapped)):
             state.activityFeed.append(
                 .init(timestamp: Date(), type: .removedFavoritePrime(state.count))
@@ -85,6 +93,6 @@ func activityFeed(
             break
         }
         
-        reducer(&state, action)
+        return reducer(&state, action)
     }
 }

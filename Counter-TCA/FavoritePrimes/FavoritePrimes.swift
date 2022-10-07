@@ -40,23 +40,22 @@ public func favoritePrimesReducer(state: inout OrderedSet<Int>, action: Favorite
 }
 
 private func saveEffect(favoritePrimes: OrderedSet<Int>) -> Effect<FavoritePrimesAction> {
-    return { _ in
+    return Effect { _ in
         let data = try! JSONEncoder().encode(favoritePrimes)
         let documentsUrl = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
         let favoritePrimesUrl = documentsUrl.appendingPathComponent("favorite-primes.json")
         try! data.write(to: favoritePrimesUrl)
-        //return nil
     }
 }
 
-private let loadEffect: Effect<FavoritePrimesAction> = { _ in
+private let loadEffect = Effect<FavoritePrimesAction> { callback in
     let documentsUrl = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
     let favoritePrimesUrl = documentsUrl.appendingPathComponent("favorite-primes.json")
     guard
         let data = try? Data(contentsOf: favoritePrimesUrl),
         let favoritePrimes = try? JSONDecoder().decode(OrderedSet<Int>.self, from: data)
-    else { return }//nil }
-    //return .loadedFavoritePrimes(favoritePrimes)
+    else { return }
+    callback(.loadedFavoritePrimes(favoritePrimes))
 }
 
 //MARK: - View

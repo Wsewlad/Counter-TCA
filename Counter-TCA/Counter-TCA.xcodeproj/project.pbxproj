@@ -130,6 +130,13 @@
 			remoteGlobalIDString = 82889B2128DF9A7D00804462;
 			remoteInfo = PrimeModal;
 		};
+		8295D92928F0B3C500A17406 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8298FAF728DD007100EBE15F /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 82889AF628DF959600804462;
+			remoteInfo = ComposableArchitecture;
+		};
 		829F6E5328EA31C200C00B80 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 8298FAF728DD007100EBE15F /* Project object */;
@@ -584,6 +591,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				8295D92A28F0B3C500A17406 /* PBXTargetDependency */,
 			);
 			name = PrimeModal;
 			packageProductDependencies = (
@@ -922,6 +930,11 @@
 			isa = PBXTargetDependency;
 			target = 82889B2128DF9A7D00804462 /* PrimeModal */;
 			targetProxy = 82889B3328DF9A7D00804462 /* PBXContainerItemProxy */;
+		};
+		8295D92A28F0B3C500A17406 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 82889AF628DF959600804462 /* ComposableArchitecture */;
+			targetProxy = 8295D92928F0B3C500A17406 /* PBXContainerItemProxy */;
 		};
 		829F6E5428EA31C200C00B80 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;

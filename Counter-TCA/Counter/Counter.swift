@@ -61,9 +61,9 @@ public struct CounterViewState {
     public init(
         count: Int,
         favoritePrimes: OrderedSet<Int>,
-        alertNthPrime: Int? = nil,
-        isNthPrimeButtonDisabled: Bool = false,
-        alertNthPrimePresented: Bool = false
+        alertNthPrime: Int?,
+        isNthPrimeButtonDisabled: Bool,
+        alertNthPrimePresented: Bool
     ) {
         self.count = count
         self.favoritePrimes = favoritePrimes
@@ -113,14 +113,11 @@ public func counterReducer(state: inout CounterState, action: CounterAction) -> 
         
     case .nthPrimeButtonTapped:
         state.isNthPrimeButtonDisabled = true
-        let count = state.count
-        return [{ callback in
-            CounterView.nthPrime(n: count) { prime in
-                DispatchQueue.main.async {
-                    callback(.nthPrimeResponse(prime))
-                }
-            }
-        }]
+        return [
+            CounterView.nthPrime(n: state.count)
+                .map(CounterAction.nthPrimeResponse)
+                .receive(on: .main)
+        ]
         
     case let .nthPrimeResponse(prime):
         state.alertNthPrime = prime
@@ -211,9 +208,30 @@ private extension CounterView {
     }
 }
 
+extension Effect where A == (Data?, URLResponse?, Error?) {
+    func decode<M: Decodable>(as type: M.Type) -> Effect<M?> {
+        self.map { data, _, _ in
+            return data
+                .flatMap { try? JSONDecoder().decode(M.self, from: $0) }
+        }
+    }
+}
+
+extension Effect {
+    func receive(on queue: DispatchQueue) -> Effect {
+        return Effect { callback in
+            self.run { a in
+                queue.async {
+                    callback(a)
+                }
+            }
+        }
+    }
+}
+
 //MARK: - Wolfram Alpha
 extension CounterView {
-    static func wolframAlpha(query: String, callback: @escaping (WolframAlphaResult?) -> Void) -> Void {
+    static func wolframAlpha(query: String) -> Effect<WolframAlphaResult?> {
         var components = URLComponents(string: "https://api.wolframalpha.com/v2/query")!
         components.queryItems = [
             URLQueryItem(name: "input", value: query),
@@ -222,30 +240,32 @@ extension CounterView {
             URLQueryItem(name: "appid", value: wolframAlphaApiKey)
         ]
 
-        URLSession.shared.dataTask(with: components.url(relativeTo: nil)!) { data, response, error in
-            callback(
-                data
-                    .flatMap { try? JSONDecoder().decode(WolframAlphaResult.self, from: $0) }
-            )
-        }
-        .resume()
+        return dataTask(with: components.url(relativeTo: nil)!)
+            .decode(as: WolframAlphaResult.self)
     }
     
-    static func nthPrime(n: Int, callback: @escaping (Int?) -> Void) -> Void {
-        wolframAlpha(query: "prime \(n)") { result in
-            callback(
-                result
-                    .flatMap {
-                        $0.queryresult
-                            .pods
-                            .first(where: { $0.primary == .some(true) })?
-                            .subpods
-                            .first?
-                            .plaintext
-                    }
-                    .flatMap(Int.init)
-            )
+    static func nthPrime(n: Int) -> Effect<Int?> {
+        return wolframAlpha(query: "prime \(n)").map { result in
+            result
+                .flatMap {
+                    $0.queryresult
+                        .pods
+                        .first(where: { $0.primary == .some(true) })?
+                        .subpods
+                        .first?
+                        .plaintext
+                }
+                .flatMap(Int.init)
         }
+    }
+}
+
+func dataTask(with url: URL) -> Effect<(Data?, URLResponse?, Error?)> {
+    return Effect { callback in
+        URLSession.shared.dataTask(with: url) { data, response, error in
+            callback((data, response, error))
+        }
+        .resume()
     }
 }
 

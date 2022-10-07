@@ -11,7 +11,7 @@ import FavoritePrimes
 import Counter
 
 struct RootView: View {
-    @EnvironmentObject var store: Store<AppState, AppAction>
+    @ObservedObject var store: Store<AppState, AppAction?>
     
     var body: some View {
         NavigationView {
@@ -40,8 +40,8 @@ struct RootView: View {
     }
 }
 
-struct RootView_Previews: PreviewProvider {
-    static var previews: some View {
-        RootView()
-    }
-}
+//struct RootView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        RootView(store: )
+//    }
+//}

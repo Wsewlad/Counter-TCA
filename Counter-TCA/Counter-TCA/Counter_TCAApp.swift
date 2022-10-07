@@ -34,8 +34,9 @@ struct Counter_TCAApp: App {
     
     var body: some Scene {
         WindowGroup {
-            RootView()
-                .environmentObject(store)
+            RootView(
+                store: store
+            )
         }
     }
 }
