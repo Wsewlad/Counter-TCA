@@ -6,12 +6,11 @@
 //
 
 import Foundation
-import OrderedCollections
 import SwiftUI
 import ComposableArchitecture
 
 //MARK: - State
-public typealias PrimeModalState = (count: Int, favoritePrimes: OrderedSet<Int>)
+public typealias PrimeModalState = (count: Int, favoritePrimes: [Int])
 
 //MARK: - Actions
 public enum PrimeModalAction {
@@ -26,7 +25,7 @@ public func primeModalReducer(state: inout PrimeModalState, action: PrimeModalAc
         state.favoritePrimes.append(state.count)
         return []
     case .removeFavoritePrimeTapped:
-        state.favoritePrimes.remove(state.count)
+        state.favoritePrimes.removeAll { $0 == state.count }
         return []
     }
 }

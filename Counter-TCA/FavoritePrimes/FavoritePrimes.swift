@@ -7,20 +7,19 @@
 
 import Foundation
 import SwiftUI
-import OrderedCollections
 import ComposableArchitecture
 import Combine
 
 //MARK: - Actions
 public enum FavoritePrimesAction {
     case deleteFavoritePrimes(IndexSet)
-    case loadedFavoritePrimes(OrderedSet<Int>)
+    case loadedFavoritePrimes([Int])
     case saveButtonTapped
     case loadButtonTapped
 }
 
 //MARK: - Reducer
-public func favoritePrimesReducer(state: inout OrderedSet<Int>, action: FavoritePrimesAction) -> [Effect<FavoritePrimesAction>] {
+public func favoritePrimesReducer(state: inout [Int], action: FavoritePrimesAction) -> [Effect<FavoritePrimesAction>] {
     switch action {
     case .deleteFavoritePrimes(let indexSet):
         for index in indexSet {
@@ -45,7 +44,7 @@ public func favoritePrimesReducer(state: inout OrderedSet<Int>, action: Favorite
 }
 
 //MARK: - Effects
-private func saveEffect(favoritePrimes: OrderedSet<Int>) -> Effect<FavoritePrimesAction> {
+private func saveEffect(favoritePrimes: [Int]) -> Effect<FavoritePrimesAction> {
     return .fireAndForget {
         let data = try! JSONEncoder().encode(favoritePrimes)
         let documentsUrl = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
@@ -59,16 +58,16 @@ private let loadEffect = Effect<FavoritePrimesAction?>.sync {
     let favoritePrimesUrl = documentsUrl.appendingPathComponent("favorite-primes.json")
     guard
         let data = try? Data(contentsOf: favoritePrimesUrl),
-        let favoritePrimes = try? JSONDecoder().decode(OrderedSet<Int>.self, from: data)
+        let favoritePrimes = try? JSONDecoder().decode([Int].self, from: data)
     else { return nil }
     return .loadedFavoritePrimes(favoritePrimes)
 }
 
 //MARK: - View
 public struct FavoritePrimesView: View {
-    @ObservedObject var store: Store<OrderedSet<Int>, FavoritePrimesAction>
+    @ObservedObject var store: Store<[Int], FavoritePrimesAction>
     
-    public init(store: Store<OrderedSet<Int>, FavoritePrimesAction>) {
+    public init(store: Store<[Int], FavoritePrimesAction>) {
         self.store = store
     }
     

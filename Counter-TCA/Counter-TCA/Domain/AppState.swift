@@ -7,13 +7,12 @@
 
 import Foundation
 import SwiftUI
-import OrderedCollections
 import Counter
 import ComposableArchitecture
 
 struct AppState {
     var count: Int = 0
-    var favoritePrimes: OrderedSet<Int> = []
+    var favoritePrimes: [Int] = []
     var loggedInUser: User? = nil
     var activityFeed: [Activity] = []
     

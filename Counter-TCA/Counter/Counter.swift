@@ -8,10 +8,7 @@
 import Foundation
 import SwiftUI
 import ComposableArchitecture
-import OrderedCollections
 import PrimeModal
-
-let wolframAlphaApiKey = "T8R7LH-X7L2V6G98P"
 
 //MARK: - Proxy Reducer
 public let counterViewReducer = combine(
@@ -53,14 +50,14 @@ public extension CounterViewAction {
 //MARK: - State
 public struct CounterViewState {
     public var count: Int
-    public var favoritePrimes: OrderedSet<Int>
+    public var favoritePrimes: [Int]
     public var alertNthPrime: Int?
     public var isNthPrimeButtonDisabled: Bool
     public var alertNthPrimePresented: Bool
     
     public init(
         count: Int,
-        favoritePrimes: OrderedSet<Int>,
+        favoritePrimes: [Int],
         alertNthPrime: Int?,
         isNthPrimeButtonDisabled: Bool,
         alertNthPrimePresented: Bool
@@ -114,7 +111,7 @@ public func counterReducer(state: inout CounterState, action: CounterAction) -> 
     case .nthPrimeButtonTapped:
         state.isNthPrimeButtonDisabled = true
         return [
-            CounterView.nthPrime(n: state.count)
+            nthPrime(n: state.count)
                 .map(CounterAction.nthPrimeResponse)
                 .receive(on: DispatchQueue.main)
                 .eraseToEffect()
@@ -205,60 +202,6 @@ private extension CounterView {
                 Text("What is the \(self.store.state.count.ordinal) prime?")
             }
             .disabled(self.store.state.isNthPrimeButtonDisabled)
-        }
-    }
-}
-
-//MARK: - Wolfram Alpha
-extension CounterView {
-    static func wolframAlpha(query: String) -> Effect<WolframAlphaResult?> {
-        var components = URLComponents(string: "https://api.wolframalpha.com/v2/query")!
-        components.queryItems = [
-            URLQueryItem(name: "input", value: query),
-            URLQueryItem(name: "format", value: "plaintext"),
-            URLQueryItem(name: "output", value: "JSON"),
-            URLQueryItem(name: "appid", value: wolframAlphaApiKey)
-        ]
-
-        return URLSession.shared
-            .dataTaskPublisher(for: components.url(relativeTo: nil)!)
-            .map { data, _ in data }
-            .decode(type: WolframAlphaResult?.self, decoder: JSONDecoder())
-            .replaceError(with: nil)
-            .eraseToEffect()
-    }
-    
-    static func nthPrime(n: Int) -> Effect<Int?> {
-        return wolframAlpha(query: "prime \(n)").map { result in
-            result
-                .flatMap {
-                    $0.queryresult
-                        .pods
-                        .first(where: { $0.primary == .some(true) })?
-                        .subpods
-                        .first?
-                        .plaintext
-                }
-                .flatMap(Int.init)
-        }
-        .eraseToEffect()
-    }
-}
-
-//MARK: - Models
-struct WolframAlphaResult: Decodable {
-    let queryresult: QueryResult
-    
-    struct QueryResult: Decodable {
-        let pods: [Pod]
-        
-        struct Pod: Decodable {
-            let primary: Bool?
-            let subpods: [SubPod]
-            
-            struct SubPod: Decodable {
-                let plaintext: String
-            }
         }
     }
 }

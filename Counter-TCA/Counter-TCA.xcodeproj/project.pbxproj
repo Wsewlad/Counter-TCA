@@ -32,6 +32,7 @@
 		82889B3528DF9A7D00804462 /* PrimeModal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 82889B2228DF9A7D00804462 /* PrimeModal.framework */; };
 		82889B3628DF9A7D00804462 /* PrimeModal.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 82889B2228DF9A7D00804462 /* PrimeModal.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		82889B3E28DF9A9100804462 /* PrimeModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82889B3D28DF9A9100804462 /* PrimeModal.swift */; };
+		8291F72228F3513F00127BC9 /* WolframAlpha.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8291F72128F3513F00127BC9 /* WolframAlpha.swift */; };
 		8298A3A228E9953A001DFF01 /* DequeModule in Frameworks */ = {isa = PBXBuildFile; productRef = 8298A3A128E9953A001DFF01 /* DequeModule */; };
 		8298A3A428E9953A001DFF01 /* OrderedCollections in Frameworks */ = {isa = PBXBuildFile; productRef = 8298A3A328E9953A001DFF01 /* OrderedCollections */; };
 		8298A3A628E995C6001DFF01 /* OrderedCollections in Frameworks */ = {isa = PBXBuildFile; productRef = 8298A3A528E995C6001DFF01 /* OrderedCollections */; };
@@ -193,6 +194,7 @@
 		82889B2928DF9A7D00804462 /* PrimeModalTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PrimeModalTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		82889B3028DF9A7D00804462 /* PrimeModalTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrimeModalTests.swift; sourceTree = "<group>"; };
 		82889B3D28DF9A9100804462 /* PrimeModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrimeModal.swift; sourceTree = "<group>"; };
+		8291F72128F3513F00127BC9 /* WolframAlpha.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WolframAlpha.swift; sourceTree = "<group>"; };
 		8295D92B28F17C5700A17406 /* Combine.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = Combine.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		8298A3AE28E9F2DC001DFF01 /* Favorite Primes.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = "Favorite Primes.playground"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		8298FAFF28DD007100EBE15F /* Counter-TCA.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Counter-TCA.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -289,6 +291,7 @@
 			children = (
 				82889A9828DF952100804462 /* Counter.h */,
 				82889B1928DF995D00804462 /* Counter.swift */,
+				8291F72128F3513F00127BC9 /* WolframAlpha.swift */,
 			);
 			path = Counter;
 			sourceTree = "<group>";
@@ -673,7 +676,6 @@
 					};
 					82889ADD28DF955600804462 = {
 						CreatedOnToolsVersion = 13.4;
-						TestTargetID = 8298FAFE28DD007100EBE15F;
 					};
 					82889AF628DF959600804462 = {
 						CreatedOnToolsVersion = 13.4;
@@ -689,7 +691,6 @@
 					};
 					82889B2828DF9A7D00804462 = {
 						CreatedOnToolsVersion = 13.4;
-						TestTargetID = 8298FAFE28DD007100EBE15F;
 					};
 					8298FAFE28DD007100EBE15F = {
 						CreatedOnToolsVersion = 13.4;
@@ -800,6 +801,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				82889B1A28DF995D00804462 /* Counter.swift in Sources */,
+				8291F72228F3513F00127BC9 /* WolframAlpha.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1127,7 +1129,6 @@
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Counter-TCA.app/Counter-TCA";
 			};
 			name = Debug;
 		};
@@ -1145,7 +1146,6 @@
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Counter-TCA.app/Counter-TCA";
 			};
 			name = Release;
 		};
@@ -1325,7 +1325,6 @@
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Counter-TCA.app/Counter-TCA";
 			};
 			name = Debug;
 		};
@@ -1343,7 +1342,6 @@
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Counter-TCA.app/Counter-TCA";
 			};
 			name = Release;
 		};
