@@ -116,7 +116,8 @@ public func counterReducer(state: inout CounterState, action: CounterAction) -> 
         return [
             CounterView.nthPrime(n: state.count)
                 .map(CounterAction.nthPrimeResponse)
-                .receive(on: .main)
+                .receive(on: DispatchQueue.main)
+                .eraseToEffect()
         ]
         
     case let .nthPrimeResponse(prime):
@@ -219,8 +220,12 @@ extension CounterView {
             URLQueryItem(name: "appid", value: wolframAlphaApiKey)
         ]
 
-        return dataTask(with: components.url(relativeTo: nil)!)
-            .decode(as: WolframAlphaResult.self)
+        return URLSession.shared
+            .dataTaskPublisher(for: components.url(relativeTo: nil)!)
+            .map { data, _ in data }
+            .decode(type: WolframAlphaResult?.self, decoder: JSONDecoder())
+            .replaceError(with: nil)
+            .eraseToEffect()
     }
     
     static func nthPrime(n: Int) -> Effect<Int?> {
@@ -236,6 +241,7 @@ extension CounterView {
                 }
                 .flatMap(Int.init)
         }
+        .eraseToEffect()
     }
 }
 

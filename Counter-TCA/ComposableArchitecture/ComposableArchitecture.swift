@@ -9,45 +9,36 @@ import SwiftUI
 import Combine
 
 //MARK: - Effect
-public struct Effect<A> {
-    public let run: (@escaping (A) -> Void) -> Void
+public struct Effect<Output>: Publisher {
+    public typealias Failure = Never
     
-    public init(run: @escaping (@escaping (A) -> Void) -> Void) {
-        self.run = run
-    }
+    let publisher: AnyPublisher<Output, Failure>
     
-    public func map<B>(_ f: @escaping (A) -> B) -> Effect<B> {
-        return Effect<B> { callback in self.run { a in callback(f(a)) } }
+    public func receive<S>(subscriber: S) where S : Subscriber, Never == S.Failure, Output == S.Input {
+        self.publisher.receive(subscriber: subscriber)
     }
 }
 
-public extension Effect where A == (Data?, URLResponse?, Error?) {
-    func decode<M: Decodable>(as type: M.Type) -> Effect<M?> {
-        self.map { data, _, _ in
-            return data
-                .flatMap { try? JSONDecoder().decode(M.self, from: $0) }
-        }
+extension Publisher where Failure == Never {
+    public func eraseToEffect() -> Effect<Output> {
+        return Effect(publisher: self.eraseToAnyPublisher())
     }
 }
 
-public extension Effect {
-    func receive(on queue: DispatchQueue) -> Effect {
-        return Effect { callback in
-            self.run { a in
-                queue.async {
-                    callback(a)
-                }
-            }
-        }
+extension Effect {
+    public static func fireAndForget(work: @escaping () -> Void) -> Effect {
+        return Deferred { () -> Empty<Output, Never> in
+            work()
+            return Empty(completeImmediately: true)
+        }.eraseToEffect()
     }
 }
 
-public func dataTask(with url: URL) -> Effect<(Data?, URLResponse?, Error?)> {
-    return Effect { callback in
-        URLSession.shared.dataTask(with: url) { data, response, error in
-            callback((data, response, error))
-        }
-        .resume()
+extension Effect {
+    public static func sync(work: @escaping () -> Output) -> Effect {
+        return Deferred {
+            Just(work())
+        }.eraseToEffect()
     }
 }
 
@@ -58,7 +49,8 @@ public typealias Reducer<State, Action> = (inout State, Action) -> [Effect<Actio
 public final class Store<State, Action>: ObservableObject {
     private let reducer: Reducer<State, Action>
     @Published public private(set) var state: State
-    private var cancellable: Cancellable?
+    private var viewCancellable: Cancellable?
+    private var effectCancellables: Set<AnyCancellable> = []
     
     public init(state: State, reducer: @escaping Reducer<State, Action>) {
         self.state = state
@@ -68,7 +60,19 @@ public final class Store<State, Action>: ObservableObject {
     public func send(_ action: Action) {
         let effects = self.reducer(&self.state, action)
         effects.forEach { effect in
-            effect.run(self.send)
+            var effectCancellable: AnyCancellable?
+            var didComplete = false
+            effectCancellable = effect.sink(
+                receiveCompletion: { [weak self] _ in
+                    didComplete = true
+                    guard let effectCancellable = effectCancellable else { return }
+                    self?.effectCancellables.remove(effectCancellable)
+                },
+                receiveValue: self.send
+            )
+            if !didComplete, let effectCancellable = effectCancellable {
+                self.effectCancellables.insert(effectCancellable)
+            }
         }
     }
 }
@@ -87,7 +91,7 @@ extension Store {
                 return []
             }
         )
-        localStore.cancellable = self.$state.sink { [weak localStore] newState in
+        localStore.viewCancellable = self.$state.sink { [weak localStore] newState in
             localStore?.state = toLocalState(newState)
         }
         return localStore
@@ -113,14 +117,14 @@ public func pullback<GlobalState, LocalState, GlobalAction, LocalAction>(
     return { globalState, globalAction in
         guard let localAction = globalAction[keyPath: action] else { return [] }
         let localEffects = localReducer(&globalState[keyPath: state], localAction)
+        
         return localEffects.map { localEffect in
-            Effect { callback in
-                localEffect.run { localAction in
-                    var globalAction = globalAction
-                    globalAction[keyPath: action] = localAction
-                    callback(globalAction)
-                }
+            localEffect.map { localAction -> GlobalAction in
+                var globalAction = globalAction
+                globalAction[keyPath: action] = localAction
+                return globalAction
             }
+            .eraseToEffect()
         }
     }
 }
@@ -132,12 +136,14 @@ public func logging<State, Action>(
     return { state, action in
         let effects = reducer(&state, action)
         let newState = state
-        return [ Effect { _ in
-            print("Action: \(action)")
-            print("State:")
-            dump(newState)
-            print("---")
-        }] + effects
+        return [
+            .fireAndForget {
+                print("Action: \(action)")
+                print("State:")
+                dump(newState)
+                print("---")
+            }
+        ] + effects
     }
 }
 
