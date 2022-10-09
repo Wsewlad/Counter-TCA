@@ -42,6 +42,31 @@ extension Effect {
     }
 }
 
+extension Effect {
+    static func async(
+        work: @escaping (@escaping (Output) -> Void) -> Void
+    ) -> Effect {
+        return Deferred {
+            Future { callback in
+                work { output in
+                    callback(.success(output))
+                }
+            }
+        }
+        .eraseToEffect()
+    }
+}
+
+extension Publisher {
+    func hush() -> Effect<Output> {
+        return self
+          .map(Optional.some)
+          .replaceError(with: nil)
+          .compactMap { $0 }
+          .eraseToEffect()
+    }
+}
+
 //MARK: - Reducer
 public typealias Reducer<State, Action> = (inout State, Action) -> [Effect<Action>]
 
