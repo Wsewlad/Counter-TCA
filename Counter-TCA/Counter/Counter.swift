@@ -48,7 +48,7 @@ public extension CounterViewAction {
 }
 
 //MARK: - State
-public struct CounterViewState {
+public struct CounterViewState: Equatable {
     public var count: Int
     public var favoritePrimes: [Int]
     public var alertNthPrime: Int?
