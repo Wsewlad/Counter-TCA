@@ -11,7 +11,7 @@ import ComposableArchitecture
 import Combine
 
 //MARK: - Actions
-public enum FavoritePrimesAction {
+public enum FavoritePrimesAction: Equatable {
     case deleteFavoritePrimes(IndexSet)
     case loadedFavoritePrimes([Int])
     case saveButtonTapped
