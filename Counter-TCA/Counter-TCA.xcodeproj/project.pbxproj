@@ -33,17 +33,12 @@
 		82889B3628DF9A7D00804462 /* PrimeModal.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 82889B2228DF9A7D00804462 /* PrimeModal.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		82889B3E28DF9A9100804462 /* PrimeModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82889B3D28DF9A9100804462 /* PrimeModal.swift */; };
 		8291F72228F3513F00127BC9 /* WolframAlpha.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8291F72128F3513F00127BC9 /* WolframAlpha.swift */; };
-		8298A3A228E9953A001DFF01 /* DequeModule in Frameworks */ = {isa = PBXBuildFile; productRef = 8298A3A128E9953A001DFF01 /* DequeModule */; };
-		8298A3A428E9953A001DFF01 /* OrderedCollections in Frameworks */ = {isa = PBXBuildFile; productRef = 8298A3A328E9953A001DFF01 /* OrderedCollections */; };
-		8298A3A628E995C6001DFF01 /* OrderedCollections in Frameworks */ = {isa = PBXBuildFile; productRef = 8298A3A528E995C6001DFF01 /* OrderedCollections */; };
-		8298A3A828E995CF001DFF01 /* OrderedCollections in Frameworks */ = {isa = PBXBuildFile; productRef = 8298A3A728E995CF001DFF01 /* OrderedCollections */; };
-		8298A3AA28E995D4001DFF01 /* OrderedCollections in Frameworks */ = {isa = PBXBuildFile; productRef = 8298A3A928E995D4001DFF01 /* OrderedCollections */; };
-		8298A3AD28E998DD001DFF01 /* Overture in Frameworks */ = {isa = PBXBuildFile; productRef = 8298A3AC28E998DD001DFF01 /* Overture */; };
 		8298FB0328DD007100EBE15F /* Counter_TCAApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8298FB0228DD007100EBE15F /* Counter_TCAApp.swift */; };
 		8298FB0728DD007600EBE15F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8298FB0628DD007600EBE15F /* Assets.xcassets */; };
 		8298FB0A28DD007600EBE15F /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8298FB0928DD007600EBE15F /* Preview Assets.xcassets */; };
 		8298FB1128DD02EB00EBE15F /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8298FB1028DD02EB00EBE15F /* AppState.swift */; };
 		8298FB1528DD036B00EBE15F /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8298FB1428DD036B00EBE15F /* RootView.swift */; };
+		82A2F7BE28F8A39800F1F31E /* Overture in Frameworks */ = {isa = PBXBuildFile; productRef = 82A2F7BD28F8A39800F1F31E /* Overture */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -210,7 +205,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8298A3AA28E995D4001DFF01 /* OrderedCollections in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -226,7 +220,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8298A3A828E995CF001DFF01 /* OrderedCollections in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -257,7 +250,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8298A3A628E995C6001DFF01 /* OrderedCollections in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -275,11 +267,9 @@
 			files = (
 				82889B0A28DF959600804462 /* ComposableArchitecture.framework in Frameworks */,
 				82889AA928DF952200804462 /* Counter.framework in Frameworks */,
-				8298A3A228E9953A001DFF01 /* DequeModule in Frameworks */,
 				82889B3528DF9A7D00804462 /* PrimeModal.framework in Frameworks */,
-				8298A3AD28E998DD001DFF01 /* Overture in Frameworks */,
-				8298A3A428E9953A001DFF01 /* OrderedCollections in Frameworks */,
 				82889AEA28DF955600804462 /* FavoritePrimes.framework in Frameworks */,
+				82A2F7BE28F8A39800F1F31E /* Overture in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -481,7 +471,6 @@
 			);
 			name = Counter;
 			packageProductDependencies = (
-				8298A3A928E995D4001DFF01 /* OrderedCollections */,
 			);
 			productName = Counter;
 			productReference = 82889A9628DF952100804462 /* Counter.framework */;
@@ -522,7 +511,6 @@
 			);
 			name = FavoritePrimes;
 			packageProductDependencies = (
-				8298A3A728E995CF001DFF01 /* OrderedCollections */,
 			);
 			productName = FavoritePrimes;
 			productReference = 82889AD728DF955600804462 /* FavoritePrimes.framework */;
@@ -600,7 +588,6 @@
 			);
 			name = PrimeModal;
 			packageProductDependencies = (
-				8298A3A528E995C6001DFF01 /* OrderedCollections */,
 			);
 			productName = PrimeModal;
 			productReference = 82889B2228DF9A7D00804462 /* PrimeModal.framework */;
@@ -644,9 +631,7 @@
 			);
 			name = "Counter-TCA";
 			packageProductDependencies = (
-				8298A3A128E9953A001DFF01 /* DequeModule */,
-				8298A3A328E9953A001DFF01 /* OrderedCollections */,
-				8298A3AC28E998DD001DFF01 /* Overture */,
+				82A2F7BD28F8A39800F1F31E /* Overture */,
 			);
 			productName = "Counter-TCA";
 			productReference = 8298FAFF28DD007100EBE15F /* Counter-TCA.app */;
@@ -706,8 +691,7 @@
 			);
 			mainGroup = 8298FAF628DD007100EBE15F;
 			packageReferences = (
-				8298A39E28E9953A001DFF01 /* XCRemoteSwiftPackageReference "swift-collections" */,
-				8298A3AB28E998DD001DFF01 /* XCRemoteSwiftPackageReference "swift-overture" */,
+				82A2F7BC28F8A39800F1F31E /* XCRemoteSwiftPackageReference "swift-overture" */,
 			);
 			productRefGroup = 8298FB0028DD007100EBE15F /* Products */;
 			projectDirPath = "";
@@ -1612,15 +1596,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		8298A39E28E9953A001DFF01 /* XCRemoteSwiftPackageReference "swift-collections" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/apple/swift-collections.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 1.0.0;
-			};
-		};
-		8298A3AB28E998DD001DFF01 /* XCRemoteSwiftPackageReference "swift-overture" */ = {
+		82A2F7BC28F8A39800F1F31E /* XCRemoteSwiftPackageReference "swift-overture" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/pointfreeco/swift-overture";
 			requirement = {
@@ -1631,34 +1607,9 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		8298A3A128E9953A001DFF01 /* DequeModule */ = {
+		82A2F7BD28F8A39800F1F31E /* Overture */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 8298A39E28E9953A001DFF01 /* XCRemoteSwiftPackageReference "swift-collections" */;
-			productName = DequeModule;
-		};
-		8298A3A328E9953A001DFF01 /* OrderedCollections */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 8298A39E28E9953A001DFF01 /* XCRemoteSwiftPackageReference "swift-collections" */;
-			productName = OrderedCollections;
-		};
-		8298A3A528E995C6001DFF01 /* OrderedCollections */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 8298A39E28E9953A001DFF01 /* XCRemoteSwiftPackageReference "swift-collections" */;
-			productName = OrderedCollections;
-		};
-		8298A3A728E995CF001DFF01 /* OrderedCollections */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 8298A39E28E9953A001DFF01 /* XCRemoteSwiftPackageReference "swift-collections" */;
-			productName = OrderedCollections;
-		};
-		8298A3A928E995D4001DFF01 /* OrderedCollections */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 8298A39E28E9953A001DFF01 /* XCRemoteSwiftPackageReference "swift-collections" */;
-			productName = OrderedCollections;
-		};
-		8298A3AC28E998DD001DFF01 /* Overture */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 8298A3AB28E998DD001DFF01 /* XCRemoteSwiftPackageReference "swift-overture" */;
+			package = 82A2F7BC28F8A39800F1F31E /* XCRemoteSwiftPackageReference "swift-overture" */;
 			productName = Overture;
 		};
 /* End XCSwiftPackageProductDependency section */

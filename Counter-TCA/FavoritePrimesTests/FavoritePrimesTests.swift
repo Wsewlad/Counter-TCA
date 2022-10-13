@@ -19,11 +19,22 @@ class FavoritePrimesTests: XCTestCase {
     }
     
     func testSaveButtonTapped() throws {
+        Current = .mock
+        var didSave = false
+        Current.fileClient.save = { _, _ in
+            .fireAndForget {
+                didSave = true
+            }
+        }
+        
         var state = [3, 5, 7]
         let effects = favoritePrimesReducer(state: &state, action: .saveButtonTapped)
         
         XCTAssertEqual(state, [3, 5, 7])
         XCTAssertEqual(effects.count, 1)
+        
+        effects[0].sink { _ in XCTFail() }
+        XCTAssert(didSave)
     }
     
     func testLoadFavoritePrimesFlow() throws {
