@@ -1,10 +1,11 @@
 import Foundation
 import SwiftUI
 import PlaygroundSupport
-import OrderedCollections
 import ComposableArchitecture
 import PrimeModal
-import Counter
+@testable import Counter
+
+Current = .mock
 
 PlaygroundPage.current.setLiveView(
     CounterView(

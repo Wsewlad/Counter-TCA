@@ -9,6 +9,11 @@ import XCTest
 @testable import Counter
 
 class CounterTests: XCTestCase {
+    override class func setUp() {
+        super.setUp()
+        Current = .mock
+    }
+    
     func testIncrTapped() throws {
        var state = CounterViewState(
             count: 2,

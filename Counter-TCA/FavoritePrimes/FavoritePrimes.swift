@@ -35,8 +35,6 @@ public func favoritePrimesReducer(state: inout [Int], action: FavoritePrimesActi
         return [
             Current.fileClient.save("favorite-primes.json", try! JSONEncoder().encode(state))
                 .fireAndForget()
-//                .map(absurd)
-//                .eraseToEffect()
         ]
         
     case .loadButtonTapped:
@@ -50,14 +48,6 @@ public func favoritePrimesReducer(state: inout [Int], action: FavoritePrimesActi
         ]
     }
 }
-
-extension Publisher where Output == Never, Failure == Never {
-    func fireAndForget<A>() -> Effect<A> {
-        return self.map(absurd).eraseToEffect()
-    }
-}
-
-func absurd<A>(_ never: Never) -> A {}
 
 struct FileClient {
     var load: (String) -> Effect<Data?>

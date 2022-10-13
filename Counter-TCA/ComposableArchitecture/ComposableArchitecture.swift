@@ -25,6 +25,14 @@ extension Publisher where Failure == Never {
     }
 }
 
+extension Publisher where Output == Never, Failure == Never {
+    public func fireAndForget<A>() -> Effect<A> {
+        return self.map(absurd).eraseToEffect()
+    }
+}
+
+func absurd<A>(_ never: Never) -> A {}
+
 extension Effect {
     public static func fireAndForget(work: @escaping () -> Void) -> Effect {
         return Deferred { () -> Empty<Output, Never> in
