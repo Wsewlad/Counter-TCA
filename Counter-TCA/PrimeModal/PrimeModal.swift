@@ -13,7 +13,7 @@ import ComposableArchitecture
 public typealias PrimeModalState = (count: Int, favoritePrimes: [Int])
 
 //MARK: - Actions
-public enum PrimeModalAction {
+public enum PrimeModalAction: Equatable {
     case saveFavoritePrimeTapped
     case removeFavoritePrimeTapped
 }

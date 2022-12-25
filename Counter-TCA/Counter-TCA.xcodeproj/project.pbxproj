@@ -33,6 +33,7 @@
 		82889B3628DF9A7D00804462 /* PrimeModal.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 82889B2228DF9A7D00804462 /* PrimeModal.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		82889B3E28DF9A9100804462 /* PrimeModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82889B3D28DF9A9100804462 /* PrimeModal.swift */; };
 		8291F72228F3513F00127BC9 /* WolframAlpha.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8291F72128F3513F00127BC9 /* WolframAlpha.swift */; };
+		82987D862958F064008A6A2D /* ComposableArchitectureTestSupport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82987D852958F064008A6A2D /* ComposableArchitectureTestSupport.swift */; };
 		8298FB0328DD007100EBE15F /* Counter_TCAApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8298FB0228DD007100EBE15F /* Counter_TCAApp.swift */; };
 		8298FB0728DD007600EBE15F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8298FB0628DD007600EBE15F /* Assets.xcassets */; };
 		8298FB0A28DD007600EBE15F /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8298FB0928DD007600EBE15F /* Preview Assets.xcassets */; };
@@ -191,6 +192,7 @@
 		82889B3D28DF9A9100804462 /* PrimeModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrimeModal.swift; sourceTree = "<group>"; };
 		8291F72128F3513F00127BC9 /* WolframAlpha.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WolframAlpha.swift; sourceTree = "<group>"; };
 		8295D92B28F17C5700A17406 /* Combine.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = Combine.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		82987D852958F064008A6A2D /* ComposableArchitectureTestSupport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComposableArchitectureTestSupport.swift; sourceTree = "<group>"; };
 		8298A3AE28E9F2DC001DFF01 /* Favorite Primes.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = "Favorite Primes.playground"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		8298FAFF28DD007100EBE15F /* Counter-TCA.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Counter-TCA.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8298FB0228DD007100EBE15F /* Counter_TCAApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Counter_TCAApp.swift; sourceTree = "<group>"; };
@@ -290,6 +292,7 @@
 			isa = PBXGroup;
 			children = (
 				82889AA428DF952200804462 /* CounterTests.swift */,
+				82987D852958F064008A6A2D /* ComposableArchitectureTestSupport.swift */,
 			);
 			path = CounterTests;
 			sourceTree = "<group>";
@@ -793,6 +796,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				82889AA528DF952200804462 /* CounterTests.swift in Sources */,
+				82987D862958F064008A6A2D /* ComposableArchitectureTestSupport.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

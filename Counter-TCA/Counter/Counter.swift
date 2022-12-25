@@ -17,7 +17,7 @@ public let counterViewReducer = combine(
 )
 
 //MARK: - Proxy Actions
-public enum CounterViewAction {
+public enum CounterViewAction: Equatable {
     case counter(CounterAction)
     case primeModal(PrimeModalAction)
 }
@@ -56,11 +56,11 @@ public struct CounterViewState: Equatable {
     public var alertNthPrimePresented: Bool
     
     public init(
-        count: Int,
-        favoritePrimes: [Int],
-        alertNthPrime: Int?,
-        isNthPrimeButtonDisabled: Bool,
-        alertNthPrimePresented: Bool
+        count: Int = 0,
+        favoritePrimes: [Int] = [],
+        alertNthPrime: Int? = nil,
+        isNthPrimeButtonDisabled: Bool = false,
+        alertNthPrimePresented: Bool = false
     ) {
         self.count = count
         self.favoritePrimes = favoritePrimes
@@ -81,7 +81,7 @@ public struct CounterViewState: Equatable {
 }
 
 //MARK: - Actions
-public enum CounterAction {
+public enum CounterAction: Equatable {
     case decrTapped
     case incrTapped
     case nthPrimeButtonTapped

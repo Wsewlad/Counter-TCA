@@ -6,6 +6,7 @@ import PrimeModal
 @testable import Counter
 
 Current = .mock
+Current.nthPrime = { _ in .sync { 213243232234 }}
 
 PlaygroundPage.current.setLiveView(
     CounterView(
